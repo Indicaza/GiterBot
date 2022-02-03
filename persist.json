@@ -1,0 +1,15 @@
+
+  "TemplateList":[
+    {
+      "id": 1,
+      "username": "Indicaza",
+      "templateRepoName": "Test",
+      "newRepoName": "OutTest"
+    },
+    {
+      "id": 2,
+      "username": "Zach",
+      "templateRepoName": "Test2",
+      "newRepoName": "OutTest2"
+    }
+  ]

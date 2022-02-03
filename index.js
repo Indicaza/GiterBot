@@ -7,20 +7,32 @@
  * @author Indicaza <n/a>
  */
 
+const express = require('express');
 const init = require('./utils/init');
 const cli = require('./utils/cli');
 const log = require('./utils/log');
 const prompt = require('prompt-sync')();
+const fs = require('fs');
 const figlet = require('figlet');
-// const chalk = require('chalk');
-// const gradient = require('gradient-string');
-const chalkAnimation = require('chalk-animation');
 const { exec } = require('child_process');
+const inquirer = require('inquirer');
+const { createSpinner } = require('nanospinner');
+const { request } = require('express');
 
 const input = cli.input;
 const flags = cli.flags;
 const { clear, debug } = flags;
 
+const app =
+
+// A user defined array of objects, for storing repo template shortcuts.
+let data = fs.readFileSync('persist.json');
+let TemplateList = JSON.parse(data);
+
+// Initializes the id: prop for user objects.
+let id = 0;
+
+// (Converts user input to bool.)  TODO I think I can do better here!
 const convertString = word => {
 	switch (word.toLowerCase().trim()) {
 		case 'yes':
@@ -39,14 +51,44 @@ const convertString = word => {
 	}
 };
 
-// figlet.defaults({ fontPath: 'assets/fonts' });
-//
-// figlet.preloadFonts(['Standard', 'Ghost'], ready);
+// Checks an array object for defined property values (used for checking duplicate entries before they're pushed.)
+function checkDuplicate(objArray, value) {
+	for (i = 0; i < objArray.length; i++) {
+		if (Object.values(objArray[i]).indexOf(value) > -1) {
+			return true;
+			// console.log(`${objArray[i].id} contains ${value}`);
+		} else if (Object.values(objArray[i]).indexOf(value) <= -1) {
+			return false;
+			// console.log(`${objArray[i].id} does not contain ${value}`);
+		}
+	}
+}
 
-// function ready() {
-// 	console.log(figlet.textSync('ASCII'));
-// 	console.log(figlet.textSync('Art', 'Ghost'));
-// }
+const sleep = (ms = 2000) => new Promise(r => setTimeout(r, ms));
+
+async function handleAnswer(isCorrect) {
+	const spinner = createSpinner('Checking answer...').start();
+	await sleep();
+	if (isCorrect) {
+		spinner.success({
+			text: `Nice work "Dude". That's a legit answer`
+		});
+	} else {
+		spinner.error({ text: `💀💀💀 Game over, you lose Guy` });
+		process.exit(1);
+	}
+}
+
+async function question1() {
+	const answers = await inquirer.prompt({
+		name: 'question_1',
+		type: 'list',
+		message: 'JavaScript was created in 10 days then released on\n',
+		choices: ['May 23rd, 1995', 'Nov 24th, 1995', 'Dec 4th, 1995', 'Dec 17, 1996']
+	});
+
+	return handleAnswer(answers.question_1 === 'Dec 4th, 1995');
+}
 
 (async () => {
 	init({ clear });
@@ -67,26 +109,12 @@ const convertString = word => {
 		`font-family: monospace`
 	);
 
-	// async function welcome() {
-	// 	const rainbowTitle = chalkAnimation.rainbow(
-	// 		'Who Wants To Be A JavaScript Millionaire? \n'
-	// 	);
+	await question1();
 
-	console.log(
-		figlet.textSync('	GiterBot', {
-			font: 'ANSI Shadow',
-			horizontalLayout: 'default',
-			verticalLayout: 'default',
-			width: 600,
-			whitespaceBreak: true
-		})
-	);
-
+	// Sets template repo info, then saves unique entries for quick future use.
 	for (;;) {
 		let username = prompt('  (GB)  GitHub Username: ');
-		let targetTemplateRepo = prompt(
-			'  (GB)  Name of Template Repository: '
-		);
+		let targetTemplateRepo = prompt('  (GB)  Name of Template Repository: ');
 		let targetOutputRepo = prompt('  (GB)  Name of New Repository: ');
 
 		console.log('\n');
@@ -94,8 +122,20 @@ const convertString = word => {
 		console.log(`  (GB)  Target Repository Name = ${targetTemplateRepo}`);
 		console.log(`  (GB)  New Repository Name = ${targetOutputRepo}`);
 
-		let inputCheck = prompt('  (GB)  Is Provided Info Correct? (y,n): ');
+		let inputCheck = prompt('  (GB)  Is Provided Info Correct? (Y,n): ');
 		console.log('\n');
+
+		// targetOutputRepo !== TemplateList.includes(targetOutputRepo)
+		if (checkDuplicate(TemplateList, targetTemplateRepo) !== true) {
+			TemplateList.push({
+				id: id++,
+				username: username,
+				templateRepo: targetTemplateRepo,
+				duplicateRepo: targetOutputRepo
+			});
+		}
+
+		console.log(TemplateList);
 
 		if (convertString(inputCheck) === true) {
 			exec(
