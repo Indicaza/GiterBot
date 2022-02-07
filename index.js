@@ -63,7 +63,7 @@ function checkDuplicate(objArray, value) {
 	}
 }
 
-const sleep = (ms = 2000) => new Promise(r => setTimeout(r, ms));
+// const sleep = (ms = 2000) => new Promise(r => setTimeout(r, ms));
 
 // async function handleAnswer(isCorrect) {
 // 	const spinner = createSpinner('Checking answer...').start();
@@ -78,19 +78,19 @@ const sleep = (ms = 2000) => new Promise(r => setTimeout(r, ms));
 // 	}
 // }
 
-async function question1() {
-	const answers = await inquirer.prompt({
-		name: 'question_1',
-		type: 'list',
-		message: 'JavaScript was created in 10 days then released on\n',
-		choices: ['A', 'B', 'C', 'D']
-	});
-
-	return handleAnswer(answers.question_1 === 'You Chose => A');
-	return handleAnswer(answers.question_1 === 'You Chose => B');
-	return handleAnswer(answers.question_1 === 'You Chose => C');
-	return handleAnswer(answers.question_1 === 'You Chose => D');
-}
+// async function question1() {
+// 	const answers = await inquirer.prompt({
+// 		name: 'question_1',
+// 		type: 'list',
+// 		message: 'JavaScript was created in 10 days then released on\n',
+// 		choices: ['A', 'B', 'C', 'D']
+// 	});
+//
+// 	return handleAnswer(answers.question_1 === 'You Chose => A');
+// 	return handleAnswer(answers.question_1 === 'You Chose => B');
+// 	return handleAnswer(answers.question_1 === 'You Chose => C');
+// 	return handleAnswer(answers.question_1 === 'You Chose => D');
+// }
 
 (async () => {
 	init({ clear });
