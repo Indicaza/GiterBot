@@ -7,30 +7,29 @@
  * @author Indicaza <n/a>
  */
 
-const express = require('express');
+// const express = require('express');
 const init = require('./utils/init');
 const cli = require('./utils/cli');
 const log = require('./utils/log');
 const prompt = require('prompt-sync')();
-const fs = require('fs');
+// const fs = require('fs');
 const figlet = require('figlet');
 const { exec } = require('child_process');
 const inquirer = require('inquirer');
 const { createSpinner } = require('nanospinner');
 const { request } = require('express');
+const persist = require('./persist.json');
 
 const input = cli.input;
 const flags = cli.flags;
 const { clear, debug } = flags;
 
-const app =
-
 // A user defined array of objects, for storing repo template shortcuts.
-let data = fs.readFileSync('persist.json');
-let TemplateList = JSON.parse(data);
+
+// let TemplateList = JSON.parse(data);
 
 // Initializes the id: prop for user objects.
-let id = 0;
+// let id;
 
 // (Converts user input to bool.)  TODO I think I can do better here!
 const convertString = word => {
@@ -66,28 +65,31 @@ function checkDuplicate(objArray, value) {
 
 const sleep = (ms = 2000) => new Promise(r => setTimeout(r, ms));
 
-async function handleAnswer(isCorrect) {
-	const spinner = createSpinner('Checking answer...').start();
-	await sleep();
-	if (isCorrect) {
-		spinner.success({
-			text: `Nice work "Dude". That's a legit answer`
-		});
-	} else {
-		spinner.error({ text: `💀💀💀 Game over, you lose Guy` });
-		process.exit(1);
-	}
-}
+// async function handleAnswer(isCorrect) {
+// 	const spinner = createSpinner('Checking answer...').start();
+// 	await sleep();
+// 	if (isCorrect) {
+// 		spinner.success({
+// 			text: `Nice work "Dude". That's a legit answer`
+// 		});
+// 	} else {
+// 		spinner.error({ text: `💀💀💀 Game over, you lose Guy` });
+// 		process.exit(1);
+// 	}
+// }
 
 async function question1() {
 	const answers = await inquirer.prompt({
 		name: 'question_1',
 		type: 'list',
 		message: 'JavaScript was created in 10 days then released on\n',
-		choices: ['May 23rd, 1995', 'Nov 24th, 1995', 'Dec 4th, 1995', 'Dec 17, 1996']
+		choices: ['A', 'B', 'C', 'D']
 	});
 
-	return handleAnswer(answers.question_1 === 'Dec 4th, 1995');
+	return handleAnswer(answers.question_1 === 'You Chose => A');
+	return handleAnswer(answers.question_1 === 'You Chose => B');
+	return handleAnswer(answers.question_1 === 'You Chose => C');
+	return handleAnswer(answers.question_1 === 'You Chose => D');
 }
 
 (async () => {
