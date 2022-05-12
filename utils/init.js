@@ -6,7 +6,7 @@ module.exports = ({ clear = true }) => {
 	unhandled();
 	welcome({
 		title: `GiterBot`,
-		tagLine: `by Indicaza`,
+		tagLine: `By Indicaza`,
 		description: pkg.description,
 		version: pkg.version,
 		bgColor: '#36BB09',
