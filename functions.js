@@ -5,7 +5,7 @@ const persist = require('./persist.json');
 let data = persist;
 
 // (Converts user input to bool.)  TODO I think I can do better here!
-const convertString = word => {
+function convertString(word) {
 	switch (word.toLowerCase().trim()) {
 		case 'yes':
 		case 'true':
@@ -19,9 +19,9 @@ const convertString = word => {
 		case null:
 			return false;
 		default:
-			return Boolean(word);
+			return false;
 	}
-};
+}
 
 // Checks an array of objects for specific property "values", then counts repeated values  TODO Convert to sqlite3
 // (used for checking duplicate entries before they're pushed.)

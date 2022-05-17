@@ -13,7 +13,6 @@ const log = require('./utils/log');
 const prompt = require('prompt-sync')();
 // const fs = require('fs');
 const { exec } = require('child_process');
-const persist = require('./persist.json');
 const {convertString, checkDuplicate} = require('./functions.js');
 const {configTemplateRepo} = require('./configTemplateRepo.js');
 const {createTemplateRepo} = require('./createTemplateRepo.js');
@@ -21,8 +20,6 @@ const {createTemplateRepo} = require('./createTemplateRepo.js');
 const input = cli.input;
 const flags = cli.flags;
 const { clear, debug } = flags;
-
-let data = persist;
 
 
 (async () => {

@@ -3,8 +3,8 @@ const prompt = require('prompt-sync')();
 const { exec } = require("child_process");
 
 
-function createTemplateRepo(username, targetTemplateRepo) {
-	let targetOutputRepo = prompt(`  (GB)  New Repository Name: `)
+function createTemplateRepo(username, targetTemplateRepo, targetOutputRepo) {
+	// let targetOutputRepo = prompt(`  (GB)  New Repository Name: `)
 	let inputCheck = prompt(`  (GB)  Are you sure you want to create ${targetOutputRepo}? (Y,n): `);
 	console.log('\n');
 
@@ -22,7 +22,7 @@ function createTemplateRepo(username, targetTemplateRepo) {
 				}
 				console.log(`stdout: ${stdout}`);
 			}
-		);
+		)
 	}
 }
 

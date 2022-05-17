@@ -1,59 +1,66 @@
 const { exec } = require("child_process");
 
-// function quickPush() {
-// 	// Promise.all([add(), commit(), push()]);
-// 	return 0;
-// }
 
 async function add(gitAdd = `git add --all`) {
+	return new Promise((resolve, reject) => {
 		exec(`${gitAdd}`, (error, stdout, stderr) => {
 			if (error) {
+				reject(`error: ${error.message}`);
 				console.log(`error: ${error.message}`);
-				return;
 			}
 			if (stderr) {
+				reject(`stderr: ${stderr}`);
 				console.log(`stderr: ${stderr}`);
-				return;
 			}
+			resolve(`Output: ${stdout}`);
 			console.log(`Output: ${stdout}`);
 		});
+	});
 	}
 
 async function commit(gitCommit, comment = `"GB"`) {
+	return new Promise((resolve, reject) => {
 		exec(`${gitCommit} ${comment}`, (error, stdout, stderr) => {
 			if (error) {
+				reject(`error: ${error.message}`);
 				console.log(`error: ${error.message}`);
-				return;
 			}
 			if (stderr) {
+				reject(`stderr: ${stderr}`);
 				console.log(`stderr: ${stderr}`);
-				return;
 			}
+			resolve(`Output: ${stdout}`);
 			console.log(`Output: ${stdout}`);
 		});
-	}
-
-async function push(gitPush = `git push`) {
-		exec(`${gitPush}`, (error, stdout, stderr) => {
-			if (error) {
-				console.log(`error: ${error.message}`);
-				return;
-			}
-			if (stderr) {
-				console.log(`stderr: ${stderr}`);
-				return;
-			}
-			console.log(`Output: ${stdout}`);
-		});
-	}
-
-async function quickPush(comment = `"GB"`) {
-	await add();
-	await commit( `git commit -m `,comment);
-	await push();
+	});
 }
 
-quickPush("test2")
+async function push(gitPush = `git push`) {
+	return new Promise((resolve, reject) => {
+		exec(`${gitPush}`, (error, stdout, stderr) => {
+			if (error) {
+				reject(`error: ${error.message}`);
+				console.log(`error: ${error.message}`);
+			}
+			if (stderr) {
+				reject(`stderr: ${stderr}`);
+				console.log(`stderr: ${stderr}`);
+			}
+			resolve(`Output: ${stdout}`);
+			console.log(`Output: ${stdout}`);
+		});
+	});
+}
 
+async function quickPush(comment = `"GB"`) {
+		try {
+			await add();
+			await commit(`git commit -m `, comment);
+			await push();
+		} catch (e) {
+			console.error(e);
+		}
+}
 
-//TEST2
+quickPush("1:40");
+//1:40
