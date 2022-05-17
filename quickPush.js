@@ -5,7 +5,7 @@ const { exec } = require("child_process");
 // 	return 0;
 // }
 
-function add(gitAdd = `git add --all`) {
+async function add(gitAdd = `git add --all`) {
 		exec(`${gitAdd}`, (error, stdout, stderr) => {
 			if (error) {
 				console.log(`error: ${error.message}`);
@@ -19,7 +19,7 @@ function add(gitAdd = `git add --all`) {
 		});
 	}
 
-function commit(gitCommit = `git commit -m` , comment = `"GB"`) {
+async function commit(gitCommit = `git commit -m` , comment = `"GB"`) {
 		exec(`${gitCommit} ${comment}`, (error, stdout, stderr) => {
 			if (error) {
 				console.log(`error: ${error.message}`);
@@ -33,7 +33,7 @@ function commit(gitCommit = `git commit -m` , comment = `"GB"`) {
 		});
 	}
 
-function push(gitPush = `git push --all`) {
+async function push(gitPush = `git push`) {
 		exec(`${gitPush}`, (error, stdout, stderr) => {
 			if (error) {
 				console.log(`error: ${error.message}`);
