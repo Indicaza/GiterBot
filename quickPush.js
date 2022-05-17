@@ -1,8 +1,12 @@
 const { exec } = require("child_process");
 
-function quickPush() {
-	exec(
-		`git add --all`, (error, stdout, stderr) => {
+// async function quickPush() {
+
+	let gitAdd = `git add --all`;
+	let gitCommit = `git Commit -m "(GB)"`;
+	let gitPush = `git push --all`;
+
+	exec(`${gitAdd}`, (error, stdout, stderr) => {
 		if (error) {
 			console.log(`error: ${error.message}`);
 			return;
@@ -11,20 +15,33 @@ function quickPush() {
 			console.log(`stderr: ${stderr}`);
 			return;
 		}
-		console.log(`stdout: ${stdout}`);
+		console.log(`Output: ${stdout}`);
 	});
-	exec(
-		`git commit -m "(GB)"`, (error, stdout, stderr) => {
-			if (error) {
-				console.log(`error: ${error.message}`);
-				return;
-			}
-			if (stderr) {
-				console.log(`stderr: ${stderr}`);
-				return;
-			}
-			console.log(`stdout: ${stdout}`);
-		});
-}
 
-quickPush();
+	exec(`${gitCommit}`, (error, stdout, stderr) => {
+		if (error) {
+			console.log(`error: ${error.message}`);
+			return;
+		}
+		if (stderr) {
+			console.log(`stderr: ${stderr}`);
+			return;
+		}
+		console.log(`Output: ${stdout}`);
+	});
+
+	exec(`${gitPush}`, (error, stdout, stderr) => {
+		if (error) {
+			console.log(`error: ${error.message}`);
+			return;
+		}
+		if (stderr) {
+			console.log(`stderr: ${stderr}`);
+			return;
+		}
+		console.log(`Output: ${stdout}`);
+	});
+// }
+
+// quickPush();
+//test1
