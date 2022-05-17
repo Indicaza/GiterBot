@@ -1,47 +1,59 @@
 const { exec } = require("child_process");
 
-// async function quickPush() {
-
-	let gitAdd = `git add --all`;
-	let gitCommit = `git Commit -m "(GB)"`;
-	let gitPush = `git push --all`;
-
-	exec(`${gitAdd}`, (error, stdout, stderr) => {
-		if (error) {
-			console.log(`error: ${error.message}`);
-			return;
-		}
-		if (stderr) {
-			console.log(`stderr: ${stderr}`);
-			return;
-		}
-		console.log(`Output: ${stdout}`);
-	});
-
-	exec(`${gitCommit}`, (error, stdout, stderr) => {
-		if (error) {
-			console.log(`error: ${error.message}`);
-			return;
-		}
-		if (stderr) {
-			console.log(`stderr: ${stderr}`);
-			return;
-		}
-		console.log(`Output: ${stdout}`);
-	});
-
-	exec(`${gitPush}`, (error, stdout, stderr) => {
-		if (error) {
-			console.log(`error: ${error.message}`);
-			return;
-		}
-		if (stderr) {
-			console.log(`stderr: ${stderr}`);
-			return;
-		}
-		console.log(`Output: ${stdout}`);
-	});
+// function quickPush() {
+// 	// Promise.all([add(), commit(), push()]);
+// 	return 0;
 // }
 
-// quickPush();
-//test1
+function add(gitAdd = `git add --all`) {
+		exec(`${gitAdd}`, (error, stdout, stderr) => {
+			if (error) {
+				console.log(`error: ${error.message}`);
+				return;
+			}
+			if (stderr) {
+				console.log(`stderr: ${stderr}`);
+				return;
+			}
+			console.log(`Output: ${stdout}`);
+		});
+	}
+
+function commit(gitCommit = `git commit -m` , comment = `"GB"`) {
+		exec(`${gitCommit} ${comment}`, (error, stdout, stderr) => {
+			if (error) {
+				console.log(`error: ${error.message}`);
+				return;
+			}
+			if (stderr) {
+				console.log(`stderr: ${stderr}`);
+				return;
+			}
+			console.log(`Output: ${stdout}`);
+		});
+	}
+
+function push(gitPush = `git push --all`) {
+		exec(`${gitPush}`, (error, stdout, stderr) => {
+			if (error) {
+				console.log(`error: ${error.message}`);
+				return;
+			}
+			if (stderr) {
+				console.log(`stderr: ${stderr}`);
+				return;
+			}
+			console.log(`Output: ${stdout}`);
+		});
+	}
+
+async function quickPush() {
+	await add();
+	await commit();
+	await push();
+}
+
+quickPush()
+
+
+//TEST2

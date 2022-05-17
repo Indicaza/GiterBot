@@ -11,14 +11,6 @@ function configTemplateRepo () {
 		let targetTemplateRepo = prompt('  (GB)  Name of Template Repository: ');
 		let actionNickname = prompt('  (GB)  Action Nickname: ');
 
-		// Old json persistence attempt
-		// let newTemplateConfig = {
-		// 	id: data.at(-1).id + 1,
-		// 	actionNickname: actionNickname,
-		// 	username: username,
-		// 	templateRepoName: targetTemplateRepo
-		// };
-
 		console.log('\n');
 		console.log(`  (GB)  Action Name = ${actionNickname}`);
 		console.log(`  (GB)  Username = ${username}`);

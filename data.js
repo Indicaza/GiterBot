@@ -1,4 +1,5 @@
 const sqlite3 = require('sqlite3').verbose();
+const {checkDuplicate, convertString} = require('./functions');
 let sql;
 
 //connect to DB
@@ -9,12 +10,21 @@ let sql;
 	});
 
 //Create tables
-// language=SQL format=false
-// sql = `CREATE TABLE cloneTemplate(id INTEGER PRIMARY KEY, actionNickname, username, templateRepo)`;
-// db.run(sql);
+function createTable(newTableName = 'cloneTemplate', c1 = 'actionNickname', c2 = 'username', c3 = 'templateRepo') {
+	sql = `CREATE TABLE ${newTableName}
+           (
+               id INTEGER PRIMARY KEY,
+               ${c1} TEXT,
+               ${c2} TEXT,
+               ${c3} TEXT
+           )`;
+	db.run(sql);
+}
 
 //Drop table
-// db.run("DROP TABLE cloneTemplate");
+function dropTable(tableName = 'cloneTemplate') {
+	db.run(`DROP TABLE ${tableName}`);
+}
 
 //Insert data into tables
 function insertTableData(actionNickname, username, templateRepo, tableName = 'cloneTemplate') {
@@ -26,7 +36,6 @@ function insertTableData(actionNickname, username, templateRepo, tableName = 'cl
 
 //Update table data
 function updateTableData(columnName, rowID, newValue, tableName = 'cloneTemplate') {
-	// language=SQL format=false
 	sql = `UPDATE ${tableName} SET ${columnName} = ${newValue} WHERE id = ${rowID}`;
 	db.run(sql,  err => {
 		if (err) return console.error(err.message);
@@ -76,6 +85,10 @@ function queryTableData(tableName = 'cloneTemplate') {
 		});
 }
 
+
+// createTable('cloneTemplate')
+
 queryTableData()
 
-module.exports = {insertTableData, updateTableData, deleteRowData, queryTableData,  };
+
+module.exports = {createTable, insertTableData, updateTableData, deleteRowData, queryTableData,  };
