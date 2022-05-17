@@ -19,7 +19,7 @@ async function add(gitAdd = `git add --all`) {
 		});
 	}
 
-async function commit(gitCommit = `git commit -m` , comment = `"GB"`) {
+async function commit(gitCommit, comment = `"GB"`) {
 		exec(`${gitCommit} ${comment}`, (error, stdout, stderr) => {
 			if (error) {
 				console.log(`error: ${error.message}`);
@@ -47,13 +47,13 @@ async function push(gitPush = `git push`) {
 		});
 	}
 
-async function quickPush() {
+async function quickPush(comment = `"GB"`) {
 	await add();
-	await commit();
+	await commit( `git commit -m `,comment);
 	await push();
 }
 
-quickPush()
+quickPush("test2")
 
 
 //TEST2
