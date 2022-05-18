@@ -25,7 +25,6 @@ function convertString(word) {
 
 // Checks an array of objects for specific property "values", then counts repeated values  TODO Convert to sqlite3
 // (used for checking duplicate entries before they're pushed.)
-
 function checkDuplicate(objArray, value) {
 	let propCount = 0;
 	// noinspection JSUndeclaredVariable
@@ -43,7 +42,6 @@ function checkDuplicate(objArray, value) {
 }
 
 // Returns truthy if 'value' exists as action prop
-
 function checkAction(value) {
 	let actions = 0;
 	// let idArray = [];
@@ -76,7 +74,6 @@ function createMainMenu(arr1, arr2) {
 }
 
 //Returns an array from actions
-
 function createMenu(input) {
 	let menu = [];
 	if (input.length > 0) {
@@ -90,7 +87,6 @@ function createMenu(input) {
 }
 
 // Returns json object based on user input TODO I don't think this works!
-
 function menuChoice(answer) {
 	for (i = 0; i < data.length; i++) {
 		if (answer === data[i].action) {
@@ -101,7 +97,6 @@ function menuChoice(answer) {
 }
 
 //Iterators and Generators
-
 function makeRangeIterator(start = 0, end = 100, step = 1) {
 	let nextIndex = start;
 	let iterationCount = 0;

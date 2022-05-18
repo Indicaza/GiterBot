@@ -1,10 +1,7 @@
-const persist = require('./persist.json');
 const {checkDuplicate, convertString} = require('./functions');
-const {createTable, insertTableData, deleteRowData, queryTableData, saveTemplate} =require('./data.js');
+const {createTable, insertTableData, deleteRowData, queryTableData, saveTemplate} = require('./data.js');
 const prompt = require('prompt-sync')();
-const fs = require('fs');
 
-// let data = persist;
 
 function configTemplateRepo () {
 

@@ -10,7 +10,7 @@ let sql;
 	});
 
 //Create tables (c1 = column1)
-function createTable(newTableName = 'cloneTemplate', c1 = 'actionNickname', c2 = 'username', c3 = 'templateRepo') {
+function createTable(newTableName = '"cloneTemplate"', c1 = '"actionNickname"', c2 = '"username"', c3 = '"templateRepo"') {
 	sql = `CREATE TABLE ${newTableName}
            (
                id INTEGER PRIMARY KEY,
@@ -56,15 +56,15 @@ function deleteRowData(id, tableName = 'cloneTemplate') {
 	});
 }
 
-//Returns truthy if data EXISTS TODO The limitations are REAL!!!
+//Returns truthy if data EXISTS
 function checkDuplicateTableData(value, tableName = 'cloneTemplate') {
+
 	sql = `SELECT ${value} FROM ${tableName} WHERE ${value} = ${value}` ;
 	db.run(sql, err => {
 		if (err) return console.error(err.message);
 		else return sql;
 	});
 }
-
 
 
 //Prints all table data
@@ -79,6 +79,7 @@ async function queryTableData(tableName = 'cloneTemplate') {
 		})
 }
 
+
 async function saveTemplate(actionNickname, username, templateRepo) {
 	try {
 		insertTableData(`${actionNickname}`, `${username}`, `${templateRepo}`)
@@ -91,48 +92,68 @@ async function saveTemplate(actionNickname, username, templateRepo) {
 	}
 }
 
+
 async function getDataFromAction(actionNickname, tableName = 'cloneTemplate') {
-	return new Promise((resolve, reject) => {
-		db.get(`SELECT * FROM ${tableName} WHERE actionNickname = '${actionNickname}'`, (err, rows) => {
-			if (err) reject(err);
+	let getData = () => {
+		return new Promise((resolve, reject) => {
+			db.get(`SELECT * FROM ${tableName} WHERE actionNickname = '${actionNickname}'`, (err, rows) => {
+				if (err) reject(err);
 				resolve(rows);
-		});
-	})
-}
-(async () => {
-	let actionData = await getDataFromAction('A1',);
-	console.log(actionData)
-})();
-
-//Returns falsy if table is empty
-function checkTableEmpty(tableName = 'cloneTemplate') {
-	return new Promise((resolve, reject) => {
-	sql = `SELECT count(*) from (select 0 from ${tableName} limit 1)`
-	db.all(sql, (err, result) => {
-		if (err) return console.error(err.message);
-		resolve(result);
-	})
-	})
-}
-(async () => {
-	let emptyCheck = await checkTableEmpty();
-	let resultArray = Object.values(JSON.parse(JSON.stringify(emptyCheck)))
-	// console.log(resultArray.length, typeof resultArray.length, typeof parseInt(resultArray.length))
-	if (resultArray.length === 1) {
-		console.log('table is not empty')
-		return true; }
-	if (resultArray.length === 0) {
-		console.log('table is empty')
-		return false;
+			})
+		})
 	}
-})();
+		let actionData = await getData();
+	console.log(actionData)
+	// 	return data(actionData) {
+	//
+	// }
+
+}
+// (async () => {
+// 	let testPull = getDataFromAction('a3',);
+// 	console.log(testPull)
+// })();
+// let testPull = getDataFromAction('a3',)
+// console.log(testPull)
 
 
-// createTable('cloneTemplate')
-insertTableData('a1', 'u1', 't1',)
-// deleteRowData()
-queryTableData()
+//======================================================================================================================
+//The highest order CHONK Boi function
+async function checkTableEmpty(tableName = 'cloneTemplate') {
+	let fromTable = () => {
+		return new Promise((resolve, reject) => {
+			sql = `SELECT count(*) from (select 0 from ${tableName} limit 1)`;
+			db.all(sql, (err, result) => {
+				if (err) reject(err.message);
+				resolve(result);
+			});
+		});
+	};
+	let emptyCheck = await fromTable();
+	let transformValue = JSON.stringify(emptyCheck);
+	let stringMagic = transformValue.charAt(13);
+	let schrodingersValue = parseInt(stringMagic);
+	// console.log(emptyCheck, typeof emptyCheck)
+	// console.log(transformValue, typeof transformValue)
+	// console.log(stringMagic, typeof stringMagic)
+	// console.log(schrodingersValue, typeof schrodingersValue)
+	if (schrodingersValue === 1) {
+		console.log('table is not empty');
+		return true;
+	}
+	if (schrodingersValue === 0) {
+		console.log('table is empty');
+		return false;
+	} else await console.log(schrodingersValue, typeof schrodingersValue);
+}
+
+
+// createTable()
+// insertTableData('a3', 'u3', 't3',)
+// deleteRowData(4, )
+
 // dropTable()
-
+queryTableData()
+checkTableEmpty()
 
 module.exports = {createTable, insertTableData, deleteRowData, queryTableData, saveTemplate};
