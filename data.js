@@ -58,7 +58,6 @@ function deleteRowData(id, tableName = 'cloneTemplate') {
 
 //Returns truthy if data EXISTS
 function checkDuplicateTableData(value, tableName = 'cloneTemplate') {
-
 	sql = `SELECT ${value} FROM ${tableName} WHERE ${value} = ${value}` ;
 	db.run(sql, err => {
 		if (err) return console.error(err.message);
@@ -81,40 +80,50 @@ async function queryTableData(tableName = 'cloneTemplate') {
 
 
 async function saveTemplate(actionNickname, username, templateRepo) {
-	try {
-		insertTableData(`${actionNickname}`, `${username}`, `${templateRepo}`)
-
-	} catch (err) {
-		return console.error(err.message);
-	}
-	finally {
-		queryTableData('cloneTemplate')
-	}
+	try { insertTableData(`${actionNickname}`, `${username}`, `${templateRepo}`)
+	} catch (err) {return console.error(err.message);
+	} finally {queryTableData('cloneTemplate')};
 }
 
 
-async function getDataFromAction(actionNickname, tableName = 'cloneTemplate') {
-	let getData = () => {
+// async function actionRowData(actionNickname, tableName = 'cloneTemplate') {
+// 	let fromTableRow = () => {
+// 		return new Promise((resolve, reject) => {
+// 			sql = `SELECT * FROM ${tableName} WHERE actionNickname = '${actionNickname}'`;
+// 			db.all(sql, (err, result) => {
+// 				if (err) reject(err.message);
+// 				resolve(result);
+// 			})
+// 		})
+// 	}
+// 	let actionData = await fromTableRow()
+// 	return async function(actionData) {
+// 		console.log(actionData, typeof actionData);
+// 		return JSON.stringify(actionData);
+//
+// 	}
+// }
+
+async function getRowData(actionNickname, tableName = 'cloneTemplate') {
+	let gitRow = () => {
 		return new Promise((resolve, reject) => {
-			db.get(`SELECT * FROM ${tableName} WHERE actionNickname = '${actionNickname}'`, (err, rows) => {
-				if (err) reject(err);
-				resolve(rows);
-			})
-		})
+			sql = `SELECT * FROM ${tableName} WHERE actionNickname = '${actionNickname}'`;
+			db.all(sql, (err, result) => {
+				if (err) reject(err.message);
+				resolve(result);
+			});
+		});
 	}
-		let actionData = await getData();
-	console.log(actionData)
-	// 	return data(actionData) {
-	//
-	// }
-
-}
-// (async () => {
-// 	let testPull = getDataFromAction('a3',);
-// 	console.log(testPull)
-// })();
-// let testPull = getDataFromAction('a3',)
-// console.log(testPull)
+		let actionData = await gitRow();
+		// console.log(actionData, typeof actionData);
+		return JSON.stringify(actionData);
+	}
+// let actionData = await getRowData()
+// return async function () {
+//
+// 	console.log(actionData, typeof actionData);
+// 	return JSON.stringify(actionData);
+// }
 
 
 //======================================================================================================================
@@ -153,7 +162,11 @@ async function checkTableEmpty(tableName = 'cloneTemplate') {
 // deleteRowData(4, )
 
 // dropTable()
-queryTableData()
+// queryTableData()
 checkTableEmpty()
 
+let actionData3 = [];
+getRowData('a3',)
+actionData3.append(getRowData())
+console.log(actionData3, 'A3');
 module.exports = {createTable, insertTableData, deleteRowData, queryTableData, saveTemplate};
