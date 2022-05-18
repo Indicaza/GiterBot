@@ -1,22 +1,22 @@
 const { exec } = require('child_process');
 
 async function add(gitAdd = `git add --all`) {
-	exec(`${gitAdd}`, (error, stdout, stderr) => {
+	await exec(`${gitAdd}`, (error, stdout, stderr) => {
 		if (error) {
-			console.log(`error: ${error.message}`);
+			// console.log(`error: ${error.message}`);
 			return error;
 		} if (stderr) {
-			console.log(`stderr: ${stderr}`);
+			// console.log(`stderr: ${stderr}`);
 			return stderr;
 		} else {
-			console.log(`Output: ${stdout}`);
+			// console.log(`Output: ${stdout}`);
 			return stdout;
 		}
 	});
 }
 
-async function commit(gitCommit, comment = "GB") {
-	exec(`${gitCommit} ${comment}`, (error, stdout, stderr) => {
+async function commit(gitCommit = `git commit -m `, comment = `"GB"`) {
+	await exec(`${gitCommit} ${comment}`, (error, stdout, stderr) => {
 		if (error) {
 			console.log(`error: ${error.message}`);
 			return error;
@@ -31,7 +31,7 @@ async function commit(gitCommit, comment = "GB") {
 }
 
 async function push(gitPush = `git push`) {
-	exec(`${gitPush}`, (error, stdout, stderr) => {
+	await exec(`${gitPush}`, (error, stdout, stderr) => {
 		if (error) {
 			console.log(`error: ${error.message}`);
 			return error;
@@ -45,15 +45,11 @@ async function push(gitPush = `git push`) {
 	});
 }
 
-async function quickPush(comment) {
-	try {
+async function quickPush() {
 		await add();
-		await commit(`git commit -m "${comment}"`);
+		await commit();
 		await push();
-	} catch (e) {
-		console.error(e);
-	}
 }
 
-quickPush('Non stop database function setup');
+quickPush();
 //2:13 Test2
