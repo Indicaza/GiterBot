@@ -3,13 +3,13 @@ const { exec } = require('child_process');
 async function add(gitAdd = `git add --all`) {
 	await exec(`${gitAdd}`, (error, stdout, stderr) => {
 		if (error) {
-			// console.log(`error: ${error.message}`);
+			console.log(`error: ${error.message}`);
 			return error;
 		} if (stderr) {
-			// console.log(`stderr: ${stderr}`);
+			console.log(`stderr: ${stderr}`);
 			return stderr;
 		} else {
-			// console.log(`Output: ${stdout}`);
+			console.log(`Output: ${stdout}`);
 			return stdout;
 		}
 	});
