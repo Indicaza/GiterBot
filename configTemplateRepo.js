@@ -17,10 +17,9 @@ function configTemplateRepo () {
 		let confirm = prompt(`  (GB)  Are you sure you want to save Template? (y, n) `);
 
 		if (convertString(confirm) === true) {
+			console.log('convertString() succeeded');
 			saveTemplate(actionNickname, username, templateRepo)
-		} else exec();
+		}
 }
-
-configTemplateRepo()
 
 module.exports = { configTemplateRepo };

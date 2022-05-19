@@ -2,6 +2,12 @@ const meow = require('meow');
 const meowHelp = require('cli-meow-help');
 
 const flags = {
+	quickPush: {
+		type: `boolean`,
+		default: true,
+		alias: `p`,
+		desc: `Commits and Pushes All`
+	},
 	clear: {
 		type: `boolean`,
 		default: true,

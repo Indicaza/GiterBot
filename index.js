@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 /**
  * GiterBot
  * Creates a new repository from a GitHub template.  Then clones and inits the repo.
@@ -11,7 +10,7 @@ const init = require('./utils/init');
 const cli = require('./utils/cli');
 const log = require('./utils/log');
 const prompt = require('prompt-sync')();
-// const fs = require('fs');
+const fs = require('fs');
 const { exec } = require('child_process');
 const {convertString, checkDuplicate} = require('./functions.js');
 const {configTemplateRepo} = require('./configTemplateRepo.js');
@@ -56,8 +55,11 @@ const { clear, debug } = flags;
 		case 'delete':
 			return;
 		case 'exit':
-			break;
+			process.on('SIGTERM', () => {
+				server.close(() => {
+					console.log('Process terminated');
+				});
+			});
 	}
-
 	debug && log(flags);
 })();

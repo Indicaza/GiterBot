@@ -3,11 +3,13 @@ const {checkDuplicate, convertString} = require('./functions');
 let sql;
 
 //connect to DB
-	const db = new sqlite3.Database('./database.db', sqlite3.OPEN_READWRITE, err => {
-		if (err) return console.error(err.message); else {
-			console.log('sqlite3 connection succeeded');
-		}
-	});
+const db = new sqlite3.Database('./database.db', sqlite3.OPEN_READWRITE, err => {
+	if (err) return console.error(err.message); else {
+		console.log('sqlite3 connection succeeded');
+		return db;
+	}
+});
+
 
 //Create tables (c1 = column1)
 function createTable(newTableName = '"cloneTemplate"', c1 = '"actionNickname"', c2 = '"username"', c3 = '"templateRepo"') {
@@ -80,9 +82,13 @@ async function queryTableData(tableName = 'cloneTemplate') {
 
 
 async function saveTemplate(actionNickname, username, templateRepo) {
-	try { insertTableData(`${actionNickname}`, `${username}`, `${templateRepo}`)
-	} catch (err) {return console.error(err.message);
-	} finally {queryTableData('cloneTemplate')};
+	try {
+		insertTableData(`${actionNickname}`, `${username}`, `${templateRepo}`)
+	} catch (err) {
+		return console.error(err.message);
+	} finally {
+		queryTableData('cloneTemplate')
+	}
 }
 
 
@@ -105,29 +111,25 @@ async function saveTemplate(actionNickname, username, templateRepo) {
 // }
 
 async function getRowData(actionNickname, tableName = 'cloneTemplate') {
-	let gitRow = () => {
 		return new Promise((resolve, reject) => {
 			sql = `SELECT * FROM ${tableName} WHERE actionNickname = '${actionNickname}'`;
 			db.all(sql, (err, result) => {
 				if (err) reject(err.message);
-				resolve(result);
-			});
-		});
-	}
-		let actionData = await gitRow();
-		// console.log(actionData, typeof actionData);
-		return JSON.stringify(actionData);
-	}
-// let actionData = await getRowData()
-// return async function () {
-//
-// 	console.log(actionData, typeof actionData);
-// 	return JSON.stringify(actionData);
-// }
+				resolve(result)})})}
+
+
+async function makeObjArray(actionNickname, tableName = 'cloneTemplate') {
+	await getRowData(actionNickname, tableName)
+	let actionData = await getRowData()
+	// console.log(actionData, typeof actionData);
+	JSON.stringify(actionData);
+	let objArray = { id: 1, actionNickname: 'a1', username: 'u1', templateRepo: 't1' };
+	return objArray;
+}
 
 
 //======================================================================================================================
-//The highest order CHONK Boi function
+//CHONK Boi function
 async function checkTableEmpty(tableName = 'cloneTemplate') {
 	let fromTable = () => {
 		return new Promise((resolve, reject) => {
@@ -163,10 +165,18 @@ async function checkTableEmpty(tableName = 'cloneTemplate') {
 
 // dropTable()
 // queryTableData()
-checkTableEmpty()
+// checkTableEmpty()
 
-let actionData3 = [];
-getRowData('a3',)
-actionData3.append(getRowData())
-console.log(actionData3, 'A3');
+// let actionData3 = [];
+// getRowData('a3',)
+// actionData3 = makeObjArray(getRowData('a3',));
+// console.log(actionData3, 'A3');
+
+
+
+//todo
+//Work on MVP DO NOT ADD ANYMORE FUNCTIONALITY
+//Close and open the database within each function.
+
+
 module.exports = {createTable, insertTableData, deleteRowData, queryTableData, saveTemplate};

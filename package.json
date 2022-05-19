@@ -1,8 +1,10 @@
 {
 	"name": "GiterBot",
 	"description": "Creates a new repository from a GitHub template.  Then clones and inits the repo. ",
+	"type": "commonjs",
 	"version": "0.0.1",
 	"license": "UNLICENSED",
+
 	"bin": {
 		"GiterBot": "index.js",
 		"gb": "index.js"
@@ -13,21 +15,24 @@
 		"url": "n/a"
 	},
 	"keywords": [
+		"Indicaza",
+		"GiterBot",
 		"GitHub",
+		"Git",
 		"CLI",
 		"GH",
 		"GB",
+		"sqlite3",
 		"Workflow",
 		"Template",
-		"repo",
-		"GiterBot",
-		"Indicaza"
+		"repo"
 	],
 	"files": [
 		"index.js",
 		"utils"
 	],
 	"scripts": {
+		"start": "node index.js",
 		"format": "prettier --write \"./**/*.{js,json}\""
 	},
 	"dependencies": {
