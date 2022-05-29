@@ -1,4 +1,8 @@
+//TODO HOT GARBO - NEEDS WORK
+//rm -f .git/index.lock
+//
 const { exec } = require('child_process');
+
 
 async function add(gitAdd = `git add --all`) {
 	await exec(`${gitAdd}`, (error, stdout, stderr) => {
@@ -45,6 +49,7 @@ async function push(gitPush = `git push`) {
 	});
 }
 
+
 async function quickPush() {
 		await add();
 		await commit();
@@ -52,3 +57,6 @@ async function quickPush() {
 }
 
 quickPush();
+
+
+

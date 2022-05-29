@@ -1,52 +1,45 @@
 {
-	"name": "GiterBot",
-	"description": "Creates a new repository from a GitHub template.  Then clones and inits the repo. ",
-	"type": "commonjs",
-	"version": "0.0.1",
-	"license": "UNLICENSED",
-
-	"bin": {
-		"GiterBot": "index.js",
-		"gb": "index.js"
-	},
-	"author": {
-		"name": "Indicaza",
-		"email": "indicazas@gmail.com",
-		"url": "n/a"
-	},
-	"keywords": [
-		"Indicaza",
-		"GiterBot",
-		"GitHub",
-		"Git",
-		"CLI",
-		"GH",
-		"GB",
-		"sqlite3",
-		"Workflow",
-		"Template",
-		"repo"
-	],
-	"files": [
-		"index.js",
-		"utils"
-	],
-	"scripts": {
-		"start": "node index.js",
-		"format": "prettier --write \"./**/*.{js,json}\""
-	},
-	"dependencies": {
-		"bluebird": "^3.7.2",
-		"cli-alerts": "^1.2.2",
-		"cli-handle-error": "^4.4.0",
-		"cli-handle-unhandled": "^1.1.1",
-		"cli-meow-help": "^2.0.2",
-		"cli-welcome": "^2.2.2",
-		"meow": "^9.0.0",
-		"prompt-sync": "^4.1.6",
-		"sqlite3": "^5.0.8"
-	},
-	"devDependencies": {
-		"prettier": "^2.5.1"
-	}
+  "name": "GiterBot",
+  "description": "A CLI that allows users to save terminal commands and assigns them to custom hotkeys.",
+  "type": "commonjs",
+  "version": "0.0.1",
+  "license": "MIT",
+  "main": "src/server.js",
+  "author": {
+    "name": "Indicaza",
+    "email": "indicazas@gmail.com",
+    "url": "n/a",
+    "bugs": "https://github.com/Indicaza/GiterBot/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Indicaza/GiterBot"
+  },
+  "keywords": [
+    "Indicaza",
+    "GiterBot",
+    "GitHub",
+    "Git",
+    "CLI",
+    "GH",
+    "GB",
+    "sqlite3",
+    "yargs",
+    "Workflow",
+    "repo"
+  ],
+  "bin": {
+    "GiterBot": "./src/server.js",
+    "gb": "./src/server.js",
+    "permit": "chmod +x ./src"
+  },
+  "scripts": {
+    "start": "./src/server.js",
+    "format": "../node_modules/.bin/prettier --write \\\"./**/*.{js,json}\\\""
+  },
+  "dependencies": {
+    "prompt-sync": "^4.2.0",
+    "sqlite3": "^5.0.8",
+    "yargs": "^17.5.1"
+  }
 }

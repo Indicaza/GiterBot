@@ -1,10 +1,13 @@
-const {convertString, } = require('./functions.js');
-const prompt = require('prompt-sync')();
+//
+//
+//
+const {convertString, } = require('../../scripts/functions.js');
+const prompt = require('prompt-sync')({sigint: true});
 const { exec } = require("child_process");
 
 
-function createTemplateRepo(username, targetTemplateRepo, targetOutputRepo) {
-	// let targetOutputRepo = prompt(`  (GB)  New Repository Name: `)
+function createFromTemplate(username, targetTemplateRepo) {
+	let targetOutputRepo = prompt(`  (GB)  New Repository Name: `)
 	let inputCheck = prompt(`  (GB)  Are you sure you want to create ${targetOutputRepo}? (Y,n): `);
 	console.log('\n');
 

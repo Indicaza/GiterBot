@@ -1,0 +1,36 @@
+// scratchGB.js
+//
+//
+
+    GITERBOT IDEAS & FUNCTIONALITY
+//======================================================================================================================
+
+    Make a jump to current directory shortcut (cd pwd?).
+    Create a platform to share "CommandKeys" with other GiterBot users!!!
+
+
+
+    GITERBOT TERMINOLOGY
+//======================================================================================================================
+
+    "QuickAction" - A saved user defined terminal command.
+
+
+
+
+    INTERESTING COMMANDS
+//======================================================================================================================
+
+    npm uninstall `ls -1 node_modules | tr '/\n' ' '`
+        Deletes all dependencies in package.json.
+
+    npm list
+        List all project dependencies.
+
+
+https://thenewfoundry.com/Portfolio/
+portfolio_link_class
+
+Difference between C and C++:
+C makes it easy to shoot yourself in the foot; C++ makes it harder, but when you do it blows your whole leg off.
+--Bjarne Stroustrup
