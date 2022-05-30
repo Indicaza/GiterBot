@@ -14,7 +14,7 @@ function add(gitAdd = `git add --all`) {
 			console.log(`stderr: ${stderr}`);
 			return stderr;
 		} else {
-			console.log(`Output: ${stdout}`);
+			console.log(`Output: ${stdout}1`);
 			return stdout;
 		}
 	});
@@ -29,7 +29,7 @@ function commit(gitCommit = `git commit -m`, comment = `"GB"`) {
 			console.log(`stderr: ${stderr}`);
 			return stderr;
 		} else {
-			console.log(`Output: ${stdout}`);
+			console.log(`Output: ${stdout}2`);
 			return stdout;
 		}
 	});
@@ -44,7 +44,7 @@ function push(gitPush = `git push`) {
 			console.log(`stderr: ${stderr}`);
 			return stderr;
 		} else {
-			console.log(`Output: ${stdout}`);
+			console.log(`Output: ${stdout}3`);
 			return stdout;
 		}
 	});
@@ -54,11 +54,11 @@ function push(gitPush = `git push`) {
 function quickPush() {
 	db.serialize(function() {
 		add();
-		console.log('1')
+		// console.log('1')
 		commit();
-		console.log('2')
+		// console.log('2')
 		push();
-		console.log('3')
+		// console.log('3')
 	})
 }
 
