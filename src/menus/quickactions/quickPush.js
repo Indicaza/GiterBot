@@ -1,6 +1,7 @@
 //TODO HOT GARBO - NEEDS WORK
 //rm -f .git/index.lock
 //
+const {db} = require('../../database/models/database.js')
 const { exec } = require('child_process');
 
 
@@ -51,9 +52,14 @@ async function push(gitPush = `git push`) {
 
 
 async function quickPush() {
-		await add();
-		await commit();
-		await push();
+	db.serialize(function() {
+		add();
+		console.log('1')
+		commit();
+		console.log('2')
+		push();
+		console.log('3')
+	})
 }
 
 quickPush();

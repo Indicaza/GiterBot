@@ -1,3 +1,18 @@
 //
-//git init <repository name><div class="open_grepper_editor" title="Edit & Save To Grepper"></div>
 //
+//
+/*
+
+git init <repository name>
+
+gh repo fork repository --clone=true
+
+23.git reset –soft HEAD^
+To undo last commit and bring file to staging area.
+
+
+
+
+
+
+ */

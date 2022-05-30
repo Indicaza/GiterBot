@@ -5,15 +5,16 @@
     GITERBOT IDEAS & FUNCTIONALITY
 //======================================================================================================================
 
-    Make a jump to current directory shortcut (cd pwd?).
-    Create a platform to share "CommandKeys" with other GiterBot users!!!
+    Make a jump to current directory shortcut (cd pwd?).//todo <======
+    Create a platform to share "CommandKeys" with other GiterBot users.
+    integrate a web scraper command.
 
 
 
     GITERBOT TERMINOLOGY
 //======================================================================================================================
 
-    "QuickAction" - A saved user defined terminal command.
+    "quickAction" - A saved user defined terminal command.
 
 
 
@@ -28,8 +29,11 @@
         List all project dependencies.
 
 
-https://thenewfoundry.com/Portfolio/
-portfolio_link_class
+    GIT COMMANDS MANUALS
+//======================================================================================================================
+https://training.github.com/downloads/github-git-cheat-sheet/
+https://cli.github.com/manual/gh
+
 
 Difference between C and C++:
 C makes it easy to shoot yourself in the foot; C++ makes it harder, but when you do it blows your whole leg off.
