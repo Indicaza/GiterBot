@@ -51,20 +51,11 @@ function push(gitPush = `git push`) {
 }
 
 
-function quickPush() {
-	// db.serialize(function() {
-		add();
-		console.log('1')
-		commit();
-		console.log('2')
-		push();
-		console.log('3')
-	// })
-}
-
-// rm -f .git/index.lock
-quickPush();
-
-
-
-
+(function quickPush() {
+	add();
+	console.log('1')
+	commit();
+	console.log('2')
+	push();
+	console.log('3')
+})()
