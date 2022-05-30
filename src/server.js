@@ -46,13 +46,11 @@ console.log(`%c
 		console.log(` ---------------------------------------------------------`)
 		console.log('======================================================================================================================')
 		console.log(` ------------------------------`)
-		// console.log(`   -${shake()}-`)
 		console.log('   * create')
 		console.log('   * print')
 		console.log('   * delete')
 		console.log('   * exit')
 		console.log(`  -------------`)
-		// console.log('\n')
 		tableData = 0;
 		let userInput = prompt(`   (GB) = `);
 		let userInputFiltered = userInput.toLowerCase();

@@ -31,7 +31,8 @@
   "bin": {
     "GiterBot": "./src/server.js",
     "gb": "./src/server.js",
-    "permit": "chmod +x ./src"
+    "permit": "chmod +x ./src",
+    "qp": "./src/menus/quickactions/quickPush.js"
   },
   "scripts": {
     "start": "./src/server.js",
