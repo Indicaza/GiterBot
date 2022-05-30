@@ -52,9 +52,9 @@ function push(gitPush = `git push`) {
 
 (function quickPush() {
 	add()
-	console.log('1')
+	console.log('add')
 	commit()
-	console.log('2')
+	console.log('commit')
 	push()
-	console.log('3')
+	console.log('push')
 })()

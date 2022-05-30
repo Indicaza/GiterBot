@@ -38,3 +38,10 @@ https://cli.github.com/manual/gh
 Difference between C and C++:
 C makes it easy to shoot yourself in the foot; C++ makes it harder, but when you do it blows your whole leg off.
 --Bjarne Stroustrup
+
+    "format": "../node_modules/.bin/prettier --write \\\"./**/*.{js,json}\\\""
+
+
+    SCRIPTS
+//======================================================================================================================
+https://docs.npmjs.com/cli/v8/using-npm/scripts

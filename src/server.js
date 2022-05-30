@@ -6,12 +6,9 @@
  * @author Indicaza <n/a>
  */
 //TODO UPDATE IMPORTS/EXPORTS FOR CROSS COMPATIBILITY
-
-
 const {buildCloneTemplate} = require('./database/models/cloneTemplate.model.js')
 const {printAllData} = require('./database');
 const prompt = require('prompt-sync')({sigint: true});
-const {configTemplateRepo} = require('./menus/create/configTemplateRepo.js');
 const {deleteTemplateRepo} = require('./menus/delete/deleteTemplateRepo.js');
 const {createMenu} = require('./menus/create/createMenu.js');
 

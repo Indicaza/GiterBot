@@ -20,10 +20,10 @@ async function createMenu() {
  ((    ||_// ||==  ||=||   ||   ||==     || \\/ || ||==  ||\\\\|| || ||
   \\\\__ || \\\\ ||___ || ||   ||   ||___    ||    || ||___ || \\|| \\\\_//`, `font-family: monospace`);
         console.log(` --------------------------------------------------------------------`)
-        console.log('======= delete by column or id =======================================================================================') //118
+        console.log('======== create git configs ==========================================================================================') //118
         console.log(` ----------------------------------`)
-        console.log('   * quickAction')
-        console.log('   * cloneTemplate')
+        console.log('   * configTemplate')
+        console.log('   * flags')
         console.log('   * print')
         console.log('   * home')
         console.log('   * exit')
@@ -34,9 +34,9 @@ async function createMenu() {
         let userInputFiltered = userInput.toLowerCase();
 
         switch (userInputFiltered) {
-            case 'quickAction':
+            case 'configTemplate':
                 break;
-            case 'id':
+            case '':
 
                 break;
             case 'print':

@@ -2,7 +2,7 @@
   "name": "GiterBot",
   "description": "A CLI that allows users to save terminal commands and assigns them to custom hotkeys.",
   "type": "commonjs",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "license": "MIT",
   "main": "src/server.js",
   "author": {
@@ -35,8 +35,7 @@
     "qp": "./src/menus/quickactions/quickPush.js"
   },
   "scripts": {
-    "start": "./src/server.js",
-    "format": "../node_modules/.bin/prettier --write \\\"./**/*.{js,json}\\\""
+    "start": "./src/server.js"
   },
   "dependencies": {
     "prompt-sync": "^4.2.0",

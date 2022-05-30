@@ -7,7 +7,7 @@ const {insertCloneTemplateData} = require('../../database')
 const prompt = require('prompt-sync')({sigint: true});
 
 
-async function configTemplateRepo () {
+async function configTemplate() {
 
 	let actionNickname = prompt('  (GB)  Action Nickname: ');
 	let username = prompt('  (GB)  GitHub Username: ');
@@ -30,4 +30,4 @@ async function configTemplateRepo () {
 	}
 }
 
-module.exports = { configTemplateRepo };
+module.exports = { configTemplate };
