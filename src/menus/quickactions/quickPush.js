@@ -5,8 +5,8 @@ const {db} = require('../../database/models/database.js')
 const { exec } = require('child_process');
 
 
-async function add(gitAdd = `git add --all`) {
-	await exec(`${gitAdd}`, (error, stdout, stderr) => {
+function add(gitAdd = `git add --all`) {
+	exec(`${gitAdd}`, (error, stdout, stderr) => {
 		if (error) {
 			console.log(`error: ${error.message}`);
 			return error;
@@ -20,8 +20,8 @@ async function add(gitAdd = `git add --all`) {
 	});
 }
 
-async function commit(gitCommit = `git commit -m `, comment = `"GB"`) {
-	await exec(`${gitCommit} ${comment}`, (error, stdout, stderr) => {
+function commit(gitCommit = `git commit -m `, comment = `"GB"`) {
+	exec(`${gitCommit} ${comment}`, (error, stdout, stderr) => {
 		if (error) {
 			console.log(`error: ${error.message}`);
 			return error;
@@ -35,8 +35,8 @@ async function commit(gitCommit = `git commit -m `, comment = `"GB"`) {
 	});
 }
 
-async function push(gitPush = `git push`) {
-	await exec(`${gitPush}`, (error, stdout, stderr) => {
+function push(gitPush = `git push`) {
+	exec(`${gitPush}`, (error, stdout, stderr) => {
 		if (error) {
 			console.log(`error: ${error.message}`);
 			return error;
