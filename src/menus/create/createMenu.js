@@ -54,3 +54,5 @@ async function createMenu() {
 }
 
 createMenu();
+
+module.exports = {createMenu};

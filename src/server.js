@@ -13,6 +13,7 @@ const {printAllData} = require('./database');
 const prompt = require('prompt-sync')({sigint: true});
 const {configTemplateRepo} = require('./menus/create/configTemplateRepo.js');
 const {deleteTemplateRepo} = require('./menus/delete/deleteTemplateRepo.js');
+const {createMenu} = require('./menus/create/createMenu.js');
 
 
 (async () => {
@@ -58,7 +59,7 @@ console.log(`%c
 
 		switch (userInputFiltered) {
 			case 'create':
-				await configTemplateRepo();
+				await createMenu();
 				break;
 			case 'print':
 				tableData = 1;

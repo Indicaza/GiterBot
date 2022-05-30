@@ -2,11 +2,11 @@
 //rm -f .git/index.lock
 //
 const {db} = require('../../database/models/database.js')
-const { exec } = require('child_process');
+const { execSync } = require('child_process');
 
 
 function add(gitAdd = `git add --all`) {
-	exec(`${gitAdd}`, (error, stdout, stderr) => {
+	execSync(`${gitAdd}`, (error, stdout, stderr) => {
 		if (error) {
 			console.log(`error: ${error.message}`);
 			return error;
@@ -20,8 +20,8 @@ function add(gitAdd = `git add --all`) {
 	});
 }
 
-function commit(gitCommit = `git commit -m `, comment = `"GB"`) {
-	exec(`${gitCommit} ${comment}`, (error, stdout, stderr) => {
+function commit(gitCommit = `git commit -m`, comment = `"GB"`) {
+	execSync(`${gitCommit} ${comment}`, (error, stdout, stderr) => {
 		if (error) {
 			console.log(`error: ${error.message}`);
 			return error;
@@ -36,7 +36,7 @@ function commit(gitCommit = `git commit -m `, comment = `"GB"`) {
 }
 
 function push(gitPush = `git push`) {
-	exec(`${gitPush}`, (error, stdout, stderr) => {
+	execSync(`${gitPush}`, (error, stdout, stderr) => {
 		if (error) {
 			console.log(`error: ${error.message}`);
 			return error;
@@ -62,7 +62,9 @@ function quickPush() {
 	})
 }
 
+// rm -f .git/index.lock
 quickPush();
+
 
 
 
