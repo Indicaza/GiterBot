@@ -1,10 +1,10 @@
-//
 //rm -f .git/index.lock
+//
 //
 const { execSync } = require('child_process');
 
 
-function add(gitAdd = `git add --all`) {
+(function add(gitAdd = `git add --all`) {
 	execSync(`${gitAdd}`, (error, stdout, stderr) => {
 		if (error) {
 			console.log(`error: ${error.message}`)
@@ -17,9 +17,9 @@ function add(gitAdd = `git add --all`) {
 			return stdout;
 		}
 	});
-}
+})();
 
-function commit(gitCommit = `git commit -m`, comment = `"GB"`) {
+(function commit(gitCommit = `git commit -m`, comment = `"GB"`) {
 	execSync(`${gitCommit} ${comment}`, (error, stdout, stderr) => {
 		if (error) {
 			console.log(`error: ${error.message}`)
@@ -32,9 +32,9 @@ function commit(gitCommit = `git commit -m`, comment = `"GB"`) {
 			return stdout;
 		}
 	})
-}
+})();
 
-function push(gitPush = `git push`) {
+(function push(gitPush = `git push`) {
 	execSync(`${gitPush}`, (error, stdout, stderr) => {
 		if (error) {
 			console.log(`error: ${error.message}`)
@@ -47,14 +47,11 @@ function push(gitPush = `git push`) {
 			return stdout;
 		}
 	})
-}
+})();
 
 
-(function quickPush() {
-	add()
-	console.log('add')
-	commit()
-	console.log('commit')
-	push()
-	console.log('push')
-})()
+// (function quickPush() {
+// 	add()
+// 	commit()
+// 	push()
+// })()
