@@ -51,7 +51,7 @@ async function push(gitPush = `git push`) {
 }
 
 
-async function quickPush() {
+function quickPush() {
 	db.serialize(function() {
 		add();
 		console.log('1')
