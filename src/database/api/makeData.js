@@ -49,7 +49,8 @@ function getDataByColumn(value, columnName, tableName) {
 		db.serialize(()=>{
 			db.get(sql, (err, rows)=>{
 				if (err) reject(err)
-				resolve(JSON.stringify(rows))
+				resolve(rows)
+				// resolve(JSON.stringify(rows))
 			})
 		});
 	})
@@ -57,17 +58,23 @@ function getDataByColumn(value, columnName, tableName) {
 
 async function printDataByColumn(value, columnName = 'actionNickname', tableName = 'cloneTemplate') {
 	let rowData = await getDataByColumn(value, columnName, tableName).then(results => {return results})
-	console.log(rowData)
+	console.log('======================================================================================================================')
+	console.log(`  * ID = ${rowData.id}`)
+	console.log(`  * Action Name = ${rowData.actionNickname}`)
+	console.log(`  * Username = ${rowData.username}`)
+	console.log(`  * Template Repo = ${rowData.templateRepo}`)
+	console.log('======================================================================================================================')
 }
 
 //======================================================================================================================
+//Outputs json object
 function getDataByID(value, tableName) {
-	return new Promise((resolve, reject)=>{
+	return new Promise((resolve, reject) => {
 		let sql = `SELECT * FROM ${tableName} WHERE id = '${value}';`
 		db.serialize(()=>{
 			db.get(sql, (err, rows)=>{
 				if (err) reject(err)
-				resolve(JSON.stringify(rows))
+				resolve(rows)
 			})
 		});
 	})
@@ -75,7 +82,13 @@ function getDataByID(value, tableName) {
 
 async function printDataByID(value, tableName = 'cloneTemplate') {
 	let rowData = await getDataByID(value, tableName).then(results => {return results})
-	console.log(rowData)
+	// console.log(`  (GB)  ${JSON.stringify(rowData)}`)
+	console.log('======================================================================================================================')
+	console.log(`  * ID = ${rowData.id}`)
+	console.log(`  * Action Name = ${rowData.actionNickname}`)
+	console.log(`  * Username = ${rowData.username}`)
+	console.log(`  * Template Repo = ${rowData.templateRepo}`)
+	console.log('======================================================================================================================')
 }
 
 //======================================================================================================================
@@ -97,9 +110,11 @@ async function printAllData(tableName = 'cloneTemplate') {
 	let tableData = await getAllData(tableName).then(results => {return results})
 	let filterTable = tableData.split(';')
 	filterTable.pop();
+	console.log('======================================================================================================================')
 	for (i = 0; i < filterTable.length; i++) {
 		console.log(filterTable[i])
 	}
+	console.log('======================================================================================================================')
 }
 
 

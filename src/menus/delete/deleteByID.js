@@ -1,49 +1,57 @@
 //
 //
 //
-const {
-    db,
-    buildCloneTemplate,
-    queryTableData,
-    checkColumnValue,
-    checkTableEmpty,
-    createTable,
-    addColumn,
-    insertCloneTemplateData,
-    saveTemplate,
-    deleteRow,
-    deleteRowByID,
-    deleteRowByColumn,
-    dropTable,
-    getData
-} = require('../../server');
-const {insult} = require("../../scripts/shake.js")
+const {printDataByID, printAllData, deleteRowByID} = require('../../database');
+const {convertString} = require("../../scripts/functions");
 const prompt = require('prompt-sync')({sigint: true});
 
-const {convertString} = require("../../scripts/functions");
-// const {saveTemplate} = require("../../database");
 
+async function deleteID() {
+    for (;;) {
+        console.clear()
+        console.log(`%c
+ ____    ____ __     ____ ______  ____    ____  _  _    __ ____  
+ || \\\\  ||    ||    ||    | || | ||       || )) \\\\//    || || \\\\ 
+ ||  )) ||==  ||    ||==    ||   ||==     ||=)   )/     || ||  ))
+ ||_//  ||___ ||__| ||___   ||   ||___    ||_)) //      || ||_//`, `font-family: monospace`);
+        await printAllData();
+        console.log(`\n`)
+        let id = prompt('  (GB)  Enter ID: ');
 
+        console.clear()
+        console.log(`%c
+ ____    ____ __     ____ ______  ____ 
+ || \\\\  ||    ||    ||    | || | ||    
+ ||  )) ||==  ||    ||==    ||   ||==  
+ ||_//  ||___ ||__| ||___   ||   ||___ `, `font-family: monospace`);
+        await printDataByID(id);
+        console.log(`\n`)
+        let confirm = prompt(`  (GB)  DELETE ID: ${id}? (y, n) `);
 
-function deleteID() {
+        if (convertString(confirm) === true) {
+            console.clear()
+            console.log('\n')
+            deleteRowByID(id)
+            await printAllData()
+            break;
+        }
 
-    let tableName = prompt('  (GB)  Enter Table Name: ');
-    let id = prompt('  (GB)  Enter Table ID: ');
+        console.clear()
+        console.log(`%c
+ ____    ____ __     ____ ______  ____    ___  ___  ____ __  __ __ __  ____
+ || \\\\  ||    ||    ||    | || | ||       ||\\\\//|| ||    ||\\ || || || ||   
+ ||  )) ||==  ||    ||==    ||   ||==     || \\/ || ||==  ||\\\\|| || || ||== 
+ ||_//  ||___ ||__| ||___   ||   ||___    ||    || ||___ || \\|| \\\\_// ||___`, `font-family: monospace`);
+        console.log('======================================================================================================================')
+        console.log(`\n`)
+        let exitCheck = prompt(`  (GB)  RETURN TO (DELETE MENU)? (y, n) `);
 
-
-    console.log('\n');
-    // console.log(`  (GB)  Action Name = ${actionNickname}`);
-    // console.log(`  (GB)  Username = ${username}`);
-
-    let confirm = prompt(`  (GB)  Are you sure you want to delete row ${id}? (y, n) `);
-
-    if (convertString(confirm) === true) {
-        console.log('convertString() succeeded');
-        db.serialize(function () {
-            console.log(columnExists, typeof columnExists)
-            deleteRowByID(id, tableName);
-            queryTableData(tableName);
-        })
+        if (convertString(exitCheck) === true) {
+            console.clear()
+            break;
+        } else {
+            console.clear()
+        }
     }
 }
 

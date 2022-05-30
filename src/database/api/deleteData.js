@@ -10,6 +10,8 @@ function deleteRowByID(id, tableName = 'cloneTemplate') {
     let sql = `DELETE from ${tableName} where id = ${id};`;
     db.run(sql, err => {
         if (err) return console.error(err.message);
+        console.log(`\n DELETED ID: ${id}`);
+        console.log('======================================================================================================================')
     });
 }
 
@@ -19,6 +21,8 @@ function deleteRowByColumn(columnValue, column = 'actionNickname', tableName = '
     let sql = `DELETE from ${tableName} where ${column} = ${columnValue};`;
     db.run(sql, err => {
         if (err) return console.error(err.message);
+        console.log(`\n DELETED ACTION: ${columnValue}`);
+        console.log('======================================================================================================================')
     });
 }
 

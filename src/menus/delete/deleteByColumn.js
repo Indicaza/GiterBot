@@ -1,42 +1,60 @@
 //
 //
 //
-const {
-    db,
-    buildCloneTemplate,
-    queryTableData,
-    checkColumnValue,
-    checkTableEmpty,
-    createTable,
-    addColumn,
-    insertCloneTemplateData,
-    saveTemplate,
-    deleteRowByID,
-    deleteRowByColumn,
-    dropTable,
-    getData
-} = require('../../server');
-const {insult} = require("../../scripts/shake.js")
+const {printDataByColumn, printAllData, deleteRowByColumn} = require('../../database');
+const {convertString} = require("../../scripts/functions");
 const prompt = require('prompt-sync')({sigint: true});
 
-const {convertString} = require("../../scripts/functions");
-const {saveTemplate} = require("../../database");
 
-function deleteByColumn() {
+async function deleteColumn() {
+    for (;;) {
+        console.clear()
+        console.log(`%c
+ ____    ____ __     ____ ______  ____    ____  _  _      ___   ___   __    __ __ ___  ___ __  __
+ || \\\\  ||    ||    ||    | || | ||       || )) \\\\//     //    // \\\\  ||    || || ||\\\\//|| ||\\ ||
+ ||  )) ||==  ||    ||==    ||   ||==     ||=)   )/     ((    ((   )) ||    || || || \\/ || ||\\\\||
+ ||_//  ||___ ||__| ||___   ||   ||___    ||_)) //       \\\\__  \\\\_//  ||__| \\\\_// ||    || || \\||`, `font-family: monospace`);
+        await printAllData();
+        console.log(`\n`)
+        let columnValue = prompt('  (GB)  Enter Action: ');
 
-    let column = prompt('  (GB)  Action Nickname: ');
-    let username = prompt('  (GB)  GitHub Username: ');
-    let templateRepo = prompt('  (GB)  Name of Template Repository: ');
+        console.clear()
+        console.log(`%c
+ ____    ____ __     ____ ______  ____ 
+ || \\\\  ||    ||    ||    | || | ||    
+ ||  )) ||==  ||    ||==    ||   ||==  
+ ||_//  ||___ ||__| ||___   ||   ||___ `, `font-family: monospace`);
+        await printDataByColumn(columnValue);
+        console.log(`\n`)
+        let confirm = prompt(`  (GB)  DELETE ACTION: ${columnValue}? (y, n) `);
 
-    console.log('\n');
-    console.log(`  (GB)  Action Name = ${actionNickname}`);
-    console.log(`  (GB)  Username = ${username}`);
-    console.log(`  (GB)  Target Repository Name = ${templateRepo}`);
+        if (convertString(confirm) === true) {
+            console.clear()
+            console.log('\n')
+            deleteRowByColumn(`"${columnValue}"`);
+            await printAllData();
+            break;
+        }
 
-    let confirm = prompt(`  (GB)  Are you sure you want to save Template? (y, n) `);
+        console.clear()
+        console.log(`%c
+ ____    ____ __     ____ ______  ____    ___  ___  ____ __  __ __ __  ____
+ || \\\\  ||    ||    ||    | || | ||       ||\\\\//|| ||    ||\\ || || || ||   
+ ||  )) ||==  ||    ||==    ||   ||==     || \\/ || ||==  ||\\\\|| || || ||== 
+ ||_//  ||___ ||__| ||___   ||   ||___    ||    || ||___ || \\|| \\\\_// ||___`, `font-family: monospace`);
+        console.log('======================================================================================================================')
+        console.log(`\n`)
+        let exitCheck = prompt(`  (GB)  RETURN TO (DELETE MENU)? (y, n) `);
 
-    if (convertString(confirm) === true) {
-        console.log('convertString() succeeded');
-        saveTemplate(actionNickname, username, templateRepo)
+        if (convertString(exitCheck) === true) {
+            console.clear()
+            break;
+        } else {
+            console.clear()
+        }
     }
 }
+
+
+module.exports = {deleteColumn};
+

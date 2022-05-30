@@ -23,9 +23,9 @@ async function configTemplateRepo () {
 	if (convertString(confirm) === true) {
 		console.log('convertString() succeeded');
 
-		let promise = await insertCloneTemplateData(actionNickname, username, templateRepo) // => Promise { <pending> }
+		await insertCloneTemplateData(actionNickname, username, templateRepo) // => Promise { <pending> }
 		.then(results=>{
-		console.log(results) // => { slug: 'adding-matomo-website', read_times: 1, shares: 0, likes: 0 }
+		console.log(results)
 		})
 	}
 }

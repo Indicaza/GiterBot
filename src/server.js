@@ -10,7 +10,6 @@
 
 const {buildCloneTemplate} = require('./database/models/cloneTemplate.model.js')
 const {printAllData} = require('./database');
-const {shake} = require('./scripts/shake.js')
 const prompt = require('prompt-sync')({sigint: true});
 const {configTemplateRepo} = require('./menus/create/configTemplateRepo.js');
 const {deleteTemplateRepo} = require('./menus/delete/deleteTemplateRepo.js');
@@ -20,6 +19,7 @@ const {deleteTemplateRepo} = require('./menus/delete/deleteTemplateRepo.js');
 	await buildCloneTemplate();
 	console.clear();
 		console.log(`%c
+		
 	 ██████╗ ██╗████████╗███████╗██████╗ ██████╗  ██████╗ ████████╗
 	██╔════╝ ██║╚══██╔══╝██╔════╝██╔══██╗██╔══██╗██╔═══██╗╚══██╔══╝
 	██║  ███╗██║   ██║   █████╗  ██████╔╝██████╔╝██║   ██║   ██║   
@@ -32,23 +32,33 @@ const {deleteTemplateRepo} = require('./menus/delete/deleteTemplateRepo.js');
 	for (i = 0; ;i++) {
 		if (i >= 1) {
 			console.clear()
-			console.log(`\n`)
 		}
-		if (tableData === 1) {await printAllData()}
+		if (tableData === 1) {
+			console.log(`\n`)
+			await printAllData()
+		}
 console.log(`%c
-  ___  ___  ___  __ __  __    ___  ___  ____ __  __ __ __  ____
-  ||\\\\//|| // \\\\ || ||\\ ||    ||\\\\//|| ||    ||\\ || || || ||   
-  || \\/ || ||=|| || ||\\\\||    || \\/ || ||==  ||\\\\|| || || ||== 
-  ||    || || || || || \\||    ||    || ||___ || \\|| \\\\_// ||___`, `font-family: monospace`);
-		console.log(`  -${shake()}-`)
-		console.log('    * create\n    * print\n    * delete\n    * exit\n');
+  ___  ___  ___  __ __  __    ___  ___  ____ __  __ __ __
+  ||\\\\//|| // \\\\ || ||\\ ||    ||\\\\//|| ||    ||\\ || || ||
+  || \\/ || ||=|| || ||\\\\||    || \\/ || ||==  ||\\\\|| || ||
+  ||    || || || || || \\||    ||    || ||___ || \\|| \\\\_//`, `font-family: monospace`);
+		console.log(` ---------------------------------------------------------`)
+		console.log('======================================================================================================================')
+		console.log(` ------------------------------`)
+		// console.log(`   -${shake()}-`)
+		console.log('   * create')
+		console.log('   * print')
+		console.log('   * delete')
+		console.log('   * exit')
+		console.log(`  -------------`)
+		// console.log('\n')
 		tableData = 0;
-		let userInput = prompt(`  (GB) = `);
+		let userInput = prompt(`   (GB) = `);
 		let userInputFiltered = userInput.toLowerCase();
 
 		switch (userInputFiltered) {
 			case 'create':
-				configTemplateRepo();
+				await configTemplateRepo();
 				break;
 			case 'print':
 				tableData = 1;
@@ -62,4 +72,3 @@ console.log(`%c
 		}
 	}
 })();
-
