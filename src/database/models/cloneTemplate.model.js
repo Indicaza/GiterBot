@@ -1,13 +1,13 @@
 //
 //TODO Make modular so users can create custom tables
 //
-const {checkTableEmpty, createTable, addColumn} = require('../');
+const {checkTableRows, checkTableExists, createTable, addColumn} = require('../');
 const {db} = require('./database.js');
 
 
-async function buildCloneTemplate() {
-    let tableExists = await checkTableEmpty()
-    if (tableExists === true) {
+async function buildCloneTemplate(tableName = "cloneTemplate") {
+    let tableExists = await checkTableRows()
+    if (await checkTableExists(tableName) === true) {
         db.serialize(function () {
             createTable()
             addColumn("cloneTemplate", "flags", "actionNickname", "username", "templateRepo")

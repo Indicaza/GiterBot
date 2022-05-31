@@ -57,6 +57,7 @@ function getDataByColumn(value, columnName, tableName) {
 
 async function returnByColumn(value, columnName = 'actionNickname', tableName = 'cloneTemplate') {
 	return await getDataByColumn(value, columnName, tableName).then(results => {
+		console.log(results)
 		return results
 	});
 }
@@ -83,13 +84,15 @@ async function returnByID(value, tableName = 'cloneTemplate') {
 //======================================================================================================================
 //Return all table data as obj array
 function getAllFromTable(tableName) {
-	return new Promise((resolve, reject) => {
-		let sql = `SELECT * FROM ${tableName};`
-		db.all(sql, (err, rows)=>{
-			if (err) reject(err)
-			resolve (rows)
+	try {
+		return new Promise((resolve, reject) => {
+			let sql = `SELECT * FROM ${tableName};`
+			db.all(sql, (err, rows) => {
+				if (err) reject(err)
+				resolve(rows)
+			})
 		})
-	})
+	} catch (err) {console.log(typeof err, 'asdf')}
 }
 
 async function getAll(tableName = 'cloneTemplate') {
@@ -98,10 +101,16 @@ async function getAll(tableName = 'cloneTemplate') {
 	});
 }
 
-async function printAllData(tableName = 'cloneTemplate') {
+async function printAllData(tableName = 'cloneTemplate', printString = true) {
 	let tableData = await getAllFromTable(tableName).then(results => {return results})
-	for (i = 0; i < tableData.length; i++) {
-		console.log(tableData[i])
+	if (printString === true) {
+		for (i = 0; i < tableData.length; i++) {
+			console.log(JSON.stringify(tableData[i]))
+		}
+	} else {
+		for (i = 0; i < tableData.length; i++) {
+			console.log(tableData[i])
+		}
 	}
 }
 

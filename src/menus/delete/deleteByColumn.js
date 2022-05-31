@@ -1,12 +1,13 @@
 //
 //
 //
-const {formatByColumn, printAllData, deleteRowByColumn} = require('../../database');
+const {returnByColumn, printAllData, deleteRowByColumn} = require('../../database');
 const {convertString} = require("../../scripts/functions");
 const prompt = require('prompt-sync')({sigint: true});
 
 
 async function deleteColumn() {
+
     for (;;) {
         console.clear()
         console.log(`%c
@@ -14,7 +15,9 @@ async function deleteColumn() {
  || \\\\  ||    ||    ||    | || | ||       || )) \\\\//     //    // \\\\  ||    || || ||\\\\//|| ||\\ ||
  ||  )) ||==  ||    ||==    ||   ||==     ||=)   )/     ((    ((   )) ||    || || || \\/ || ||\\\\||
  ||_//  ||___ ||__| ||___   ||   ||___    ||_)) //       \\\\__  \\\\_//  ||__| \\\\_// ||    || || \\||`, `font-family: monospace`);
+        console.log('======================================================================================================================')
         await printAllData();
+        console.log('======================================================================================================================')
         console.log(`\n`)
         let columnValue = prompt('  (GB)  Enter Action: ');
 
@@ -24,15 +27,15 @@ async function deleteColumn() {
  || \\\\  ||    ||    ||    | || | ||    
  ||  )) ||==  ||    ||==    ||   ||==  
  ||_//  ||___ ||__| ||___   ||   ||___ `, `font-family: monospace`);
-        await formatByColumn(columnValue);
+        console.log('======================================================================================================================')
+        await returnByColumn(columnValue);
+        console.log('======================================================================================================================')
         console.log(`\n`)
         let confirm = prompt(`  (GB)  DELETE ACTION: ${columnValue}? (y, n) `);
 
         if (convertString(confirm) === true) {
             console.clear()
-            console.log('\n')
             deleteRowByColumn(`"${columnValue}"`);
-            await printAllData();
             break;
         }
 

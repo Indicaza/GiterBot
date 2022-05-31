@@ -15,7 +15,8 @@ const {
     queryTableData,
     checkID,
     checkColumn,
-    checkTableEmpty
+    checkTableExists,
+    checkTableRows
 } = require('./api/checkData.js');
 
 const {
@@ -38,7 +39,8 @@ module.exports = {
     queryTableData,
     checkID,
     checkColumn,
-    checkTableEmpty,
+    checkTableExists,
+    checkTableRows,
     //deleteData
     deleteRowByID,
     deleteRowByColumn,

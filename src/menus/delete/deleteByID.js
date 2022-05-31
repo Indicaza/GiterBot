@@ -1,12 +1,13 @@
 //
 //
 //
-const {formatByID, printAllData, deleteRowByID} = require('../../database');
+const {returnByID, printAllData, deleteRowByID} = require('../../database');
 const {convertString} = require("../../scripts/functions");
 const prompt = require('prompt-sync')({sigint: true});
 
 
 async function deleteID() {
+
     for (;;) {
         console.clear()
         console.log(`%c
@@ -14,7 +15,9 @@ async function deleteID() {
  || \\\\  ||    ||    ||    | || | ||       || )) \\\\//    || || \\\\ 
  ||  )) ||==  ||    ||==    ||   ||==     ||=)   )/     || ||  ))
  ||_//  ||___ ||__| ||___   ||   ||___    ||_)) //      || ||_//`, `font-family: monospace`);
+        console.log('======================================================================================================================')
         await printAllData();
+        console.log('======================================================================================================================')
         console.log(`\n`)
         let id = prompt('  (GB)  Enter ID: ');
 
@@ -24,15 +27,15 @@ async function deleteID() {
  || \\\\  ||    ||    ||    | || | ||    
  ||  )) ||==  ||    ||==    ||   ||==  
  ||_//  ||___ ||__| ||___   ||   ||___ `, `font-family: monospace`);
-        await formatByID(id);
+        console.log('======================================================================================================================')
+        await returnByID(id);
+        console.log('======================================================================================================================')
         console.log(`\n`)
         let confirm = prompt(`  (GB)  DELETE ID: ${id}? (y, n) `);
 
         if (convertString(confirm) === true) {
             console.clear()
-            console.log('\n')
             deleteRowByID(id)
-            await printAllData()
             break;
         }
 

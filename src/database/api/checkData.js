@@ -70,8 +70,21 @@ async function checkID(idValue, tableName = 'cloneTemplate') {
 }
 
 //======================================================================================================================
-//Returns truthy if table is empty
-async function checkTableEmpty(tableName = 'cloneTemplate') {
+//Returns true if table exists
+async function checkTableExists(tableName) {
+	return await new Promise((resolve, reject) => {
+		let sql = `SELECT name FROM sqlite_master WHERE type = 'table' AND name = "${tableName}";`
+		db.all(sql, (err, results) => {
+			if (err) reject(err);
+			// resolve(results);
+			resolve(Boolean(results.length))
+		})
+	})
+}
+
+//======================================================================================================================
+//Returns true if table is empty
+async function checkTableRows(tableName = 'cloneTemplate') {
 	try {
 		let fromTable = () => {
 			return new Promise((resolve, reject) => {
@@ -92,8 +105,14 @@ async function checkTableEmpty(tableName = 'cloneTemplate') {
 		if (schrodingersValue === 0) {
 			return true;
 		}
-	} catch (err) {return false}
+	} catch (err) {return true}
 }
 
 
-module.exports = {queryTableData, checkID, checkColumn, checkTableEmpty};
+module.exports = {
+	queryTableData,
+	checkID,
+	checkColumn,
+	checkTableExists,
+	checkTableRows
+};
