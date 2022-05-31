@@ -6,16 +6,17 @@
  * @author Indicaza <n/a>
  */
 //TODO UPDATE IMPORTS/EXPORTS FOR CROSS COMPATIBILITY
+
 const {buildCloneTemplate} = require('./database/models/cloneTemplate.model.js')
 const {printAllData} = require('./database');
+const {createMenu, deleteMenu} = require('./menus');
 const prompt = require('prompt-sync')({sigint: true});
-const {deleteTemplateRepo} = require('./menus/delete/deleteTemplateRepo.js');
-const {createMenu} = require('./menus/create/createMenu.js');
 
 
 (async () => {
-	await buildCloneTemplate();
 	console.clear();
+	await buildCloneTemplate();
+
 		console.log(`%c
 		
 	 ██████╗ ██╗████████╗███████╗██████╗ ██████╗  ██████╗ ████████╗
@@ -57,7 +58,7 @@ console.log(`%c
 				await createMenu();
 				break;
 			case 'delete':
-				await deleteTemplateRepo();
+				await deleteMenu();
 				break;
 			case 'print':
 				tableData = 1;

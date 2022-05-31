@@ -7,7 +7,7 @@ const {deleteID} = require('./deleteByID.js')
 const {deleteColumn} = require('./deleteByColumn.js')
 
 
-async function deleteTemplateRepo() {
+async function deleteMenu() {
     let tableData;
     let home;
     for (; ;) {
@@ -57,4 +57,4 @@ console.log(`%c
 }
 
 
-module.exports = {deleteTemplateRepo}
+module.exports = {deleteMenu}

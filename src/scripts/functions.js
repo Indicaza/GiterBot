@@ -1,8 +1,6 @@
-// noinspection JSUndeclaredVariable
-
-// const persist = require('./persist.json');
 //
-// let data = persist;
+//TODO TRIM UNUSED AND DISTRIBUTE BASED ON SCOPE
+//
 
 // (Converts user input to bool.)  TODO I think I can do better here!
 function convertString(word) {

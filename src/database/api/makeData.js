@@ -61,18 +61,6 @@ async function returnByColumn(value, columnName = 'actionNickname', tableName = 
 	});
 }
 
-async function formatByColumn(value, columnName = 'actionNickname', tableName = 'cloneTemplate') {
-	let rowData = await getDataByColumn(value, columnName, tableName).then(results => {return results})
-	console.log('======================================================================================================================')
-	console.log(`  * ID = ${rowData.id}`)
-	console.log(`  * Action Name = ${rowData.actionNickname}`)
-	console.log(`  * Username = ${rowData.username}`)
-	console.log(`  * Template Repo = ${rowData.templateRepo}`)
-	console.log('======================================================================================================================')
-}
-
-//======================================================================================================================
-//Outputs json object
 function getDataByID(value, tableName) {
 	return new Promise((resolve, reject) => {
 		let sql = `SELECT * FROM ${tableName} WHERE id = '${value}';`
@@ -87,44 +75,34 @@ function getDataByID(value, tableName) {
 
 async function returnByID(value, tableName = 'cloneTemplate') {
 	return await getDataByID(value, tableName).then(results => {
+		console.log(results)
 		return results
 	});
 }
 
-async function formatByID(value, tableName = 'cloneTemplate') {
-	let rowData = await getDataByID(value, tableName).then(results => {return results})
-	console.log('======================================================================================================================')
-	console.log(`  * ID = ${rowData.id}`)
-	console.log(`  * Action Name = ${rowData.actionNickname}`)
-	console.log(`  * Username = ${rowData.username}`)
-	console.log(`  * Template Repo = ${rowData.templateRepo}`)
-	console.log('======================================================================================================================')
-}
-
 //======================================================================================================================
-function getAllData(tableName) {
+//Return all table data as obj array
+function getAllFromTable(tableName) {
 	return new Promise((resolve, reject) => {
 		let sql = `SELECT * FROM ${tableName};`
-		db.all(sql, (err, rows) => {
+		db.all(sql, (err, rows)=>{
 			if (err) reject(err)
-			let table;
-			rows.forEach(row => {
-				table = table + JSON.stringify(row) + ';';
-			})
-			resolve(table.replace("undefined", ""));
+			resolve (rows)
 		})
 	})
 }
 
+async function getAll(tableName = 'cloneTemplate') {
+	return await getAllFromTable(tableName).then(results => {
+		return results
+	});
+}
+
 async function printAllData(tableName = 'cloneTemplate') {
-	let tableData = await getAllData(tableName).then(results => {return results})
-	let filterTable = tableData.split(';')
-	filterTable.pop();
-	console.log('======================================================================================================================')
-	for (i = 0; i < filterTable.length; i++) {
-		console.log(filterTable[i])
+	let tableData = await getAllFromTable(tableName).then(results => {return results})
+	for (i = 0; i < tableData.length; i++) {
+		console.log(tableData[i])
 	}
-	console.log('======================================================================================================================')
 }
 
 
@@ -132,9 +110,8 @@ module.exports = {
 	createTable,
 	addColumn,
 	insertCloneTemplateData,
-	formatByID,
-	formatByColumn,
 	returnByColumn,
 	returnByID,
+	getAll,
 	printAllData
 };
