@@ -50,13 +50,18 @@ function getDataByColumn(value, columnName, tableName) {
 			db.get(sql, (err, rows)=>{
 				if (err) reject(err)
 				resolve(rows)
-				// resolve(JSON.stringify(rows))
 			})
 		});
 	})
 }
 
-async function printDataByColumn(value, columnName = 'actionNickname', tableName = 'cloneTemplate') {
+async function returnByColumn(value, columnName = 'actionNickname', tableName = 'cloneTemplate') {
+	return await getDataByColumn(value, columnName, tableName).then(results => {
+		return results
+	});
+}
+
+async function formatByColumn(value, columnName = 'actionNickname', tableName = 'cloneTemplate') {
 	let rowData = await getDataByColumn(value, columnName, tableName).then(results => {return results})
 	console.log('======================================================================================================================')
 	console.log(`  * ID = ${rowData.id}`)
@@ -80,9 +85,14 @@ function getDataByID(value, tableName) {
 	})
 }
 
-async function printDataByID(value, tableName = 'cloneTemplate') {
+async function returnByID(value, tableName = 'cloneTemplate') {
+	return await getDataByID(value, tableName).then(results => {
+		return results
+	});
+}
+
+async function formatByID(value, tableName = 'cloneTemplate') {
 	let rowData = await getDataByID(value, tableName).then(results => {return results})
-	// console.log(`  (GB)  ${JSON.stringify(rowData)}`)
 	console.log('======================================================================================================================')
 	console.log(`  * ID = ${rowData.id}`)
 	console.log(`  * Action Name = ${rowData.actionNickname}`)
@@ -122,7 +132,9 @@ module.exports = {
 	createTable,
 	addColumn,
 	insertCloneTemplateData,
-	printDataByID,
-	printDataByColumn,
+	formatByID,
+	formatByColumn,
+	returnByColumn,
+	returnByID,
 	printAllData
 };

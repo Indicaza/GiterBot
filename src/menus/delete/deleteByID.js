@@ -1,7 +1,7 @@
 //
 //
 //
-const {printDataByID, printAllData, deleteRowByID} = require('../../database');
+const {formatByID, printAllData, deleteRowByID} = require('../../database');
 const {convertString} = require("../../scripts/functions");
 const prompt = require('prompt-sync')({sigint: true});
 
@@ -24,7 +24,7 @@ async function deleteID() {
  || \\\\  ||    ||    ||    | || | ||    
  ||  )) ||==  ||    ||==    ||   ||==  
  ||_//  ||___ ||__| ||___   ||   ||___ `, `font-family: monospace`);
-        await printDataByID(id);
+        await formatByID(id);
         console.log(`\n`)
         let confirm = prompt(`  (GB)  DELETE ID: ${id}? (y, n) `);
 

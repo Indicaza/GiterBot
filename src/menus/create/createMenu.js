@@ -2,6 +2,7 @@
 //
 //
 const {printAllData} = require('../../database');
+const {configTemplate} = require('./configTemplate.js')
 const prompt = require('prompt-sync')({sigint: true});
 
 
@@ -22,7 +23,7 @@ async function createMenu() {
         console.log(` --------------------------------------------------------------------`)
         console.log('======== create git configs ==========================================================================================') //118
         console.log(` ----------------------------------`)
-        console.log('   * configTemplate')
+        console.log('   * config')
         console.log('   * flags')
         console.log('   * print')
         console.log('   * home')
@@ -34,10 +35,10 @@ async function createMenu() {
         let userInputFiltered = userInput.toLowerCase();
 
         switch (userInputFiltered) {
-            case 'configTemplate':
+            case 'config':
+                await configTemplate();
                 break;
-            case '':
-
+            case 'flags':
                 break;
             case 'print':
                 tableData = 1;

@@ -44,8 +44,8 @@ console.log(`%c
 		console.log('======================================================================================================================')
 		console.log(` ------------------------------`)
 		console.log('   * create')
-		console.log('   * print')
 		console.log('   * delete')
+		console.log('   * print')
 		console.log('   * exit')
 		console.log(`  -------------`)
 		tableData = 0;
@@ -56,11 +56,11 @@ console.log(`%c
 			case 'create':
 				await createMenu();
 				break;
-			case 'print':
-				tableData = 1;
-				break;
 			case 'delete':
 				await deleteTemplateRepo();
+				break;
+			case 'print':
+				tableData = 1;
 				break;
 			case 'exit':
 				console.clear()

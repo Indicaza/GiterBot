@@ -5,8 +5,10 @@ const {
     createTable,
     addColumn,
     insertCloneTemplateData,
-    printDataByID,
-    printDataByColumn,
+    formatByID,
+    formatByColumn,
+    returnByColumn,
+    returnByID,
     printAllData
 } = require('./api/makeData.js');
 
@@ -29,8 +31,10 @@ module.exports = {
     createTable,
     addColumn,
     insertCloneTemplateData,
-    printDataByID,
-    printDataByColumn,
+    formatByID,
+    formatByColumn,
+    returnByColumn,
+    returnByID,
     printAllData,
     //checkData
     queryTableData,

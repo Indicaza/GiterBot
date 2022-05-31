@@ -1,7 +1,7 @@
 //
 //
 //
-const {printDataByColumn, printAllData, deleteRowByColumn} = require('../../database');
+const {formatByColumn, printAllData, deleteRowByColumn} = require('../../database');
 const {convertString} = require("../../scripts/functions");
 const prompt = require('prompt-sync')({sigint: true});
 
@@ -24,7 +24,7 @@ async function deleteColumn() {
  || \\\\  ||    ||    ||    | || | ||    
  ||  )) ||==  ||    ||==    ||   ||==  
  ||_//  ||___ ||__| ||___   ||   ||___ `, `font-family: monospace`);
-        await printDataByColumn(columnValue);
+        await formatByColumn(columnValue);
         console.log(`\n`)
         let confirm = prompt(`  (GB)  DELETE ACTION: ${columnValue}? (y, n) `);
 

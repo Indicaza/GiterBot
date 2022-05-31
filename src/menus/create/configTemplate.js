@@ -8,7 +8,7 @@ const prompt = require('prompt-sync')({sigint: true});
 
 
 async function configTemplate() {
-
+	console.clear()
 	let actionNickname = prompt('  (GB)  Action Nickname: ');
 	let username = prompt('  (GB)  GitHub Username: ');
 	let templateRepo = prompt('  (GB)  Name of Template Repository: ');
@@ -23,10 +23,10 @@ async function configTemplate() {
 	if (convertString(confirm) === true) {
 		console.log('convertString() succeeded');
 
-		await insertCloneTemplateData(actionNickname, username, templateRepo) // => Promise { <pending> }
-		.then(results=>{
-		console.log(results)
-		})
+		await insertCloneTemplateData(actionNickname, username, templateRepo)
+		// .then(results=>{
+		// console.log(results)
+		// })
 	}
 }
 

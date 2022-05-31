@@ -8,6 +8,7 @@
     Make a jump to current directory shortcut (cd pwd?).//todo <======
     Create a platform to share "CommandKeys" with other GiterBot users.
     integrate a web scraper command.
+    Migrate to React INK.
 
 
 

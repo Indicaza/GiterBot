@@ -48,10 +48,3 @@ const { execSync } = require('child_process');
 		}
 	})
 })();
-
-
-// (function quickPush() {
-// 	add()
-// 	commit()
-// 	push()
-// })()
