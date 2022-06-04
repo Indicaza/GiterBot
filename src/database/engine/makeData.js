@@ -1,18 +1,24 @@
 //
 //
 //
-const {db} = require('../models/database.js');
+const {db} = require('../schema/database.js');
+const {checkID} = require("../index");
 
 
 //======================================================================================================================
-function createTable(newTableName = 'cloneTemplate') {
+async function createTable(newTableName = 'cloneTemplate') {
+	return new Promise((resolve, reject) => {
 		let sql = `CREATE TABLE ${newTableName}(id INTEGER PRIMARY KEY);`
-		db.run(sql)
+		db.run(sql, (err, result) => {
+			if (err) reject(err);
+			resolve(result)
+		})
+	})
 }
 
 //======================================================================================================================
 //Variadic column generation
-function addColumn(tableName, ...columns) {
+async function addColumn(tableName, ...columns) {
 	return new Promise((resolve, reject) => {
 		if (columns.length <= 0) {
 			reject()
@@ -22,25 +28,24 @@ function addColumn(tableName, ...columns) {
 				let columnArity = [];
 				columnArity.unshift(`${ele} TEXT`)
 				let restString = columnArity.join(',')
-				let sql = `ALTER TABLE ${tableName}
-					ADD ${restString};`
-				db.run(sql, (err, result) => {
+				let sql = `ALTER TABLE ${tableName} ADD ${restString};`
+				db.run(sql, (err) => {
 					if (err) reject();
 				})
 			})
-		} resolve()
+		} resolve(true)
 	})
 }
 
 //======================================================================================================================
 //Insert data into specified table
-async function insertCloneTemplateData(actionNickname, username, templateRepo, tableName = 'cloneTemplate') {
-	let sql = `INSERT INTO ${tableName}(actionNickname, username, templateRepo) VALUES (?, ?, ?);`;
-	await db.run(sql, [actionNickname, username, templateRepo], err => {
-		if (err) return console.error(err.message);
-		else return console.log(`${actionNickname} stored in ${tableName}`);
-	});
-}
+// async function insertCloneTemplateData(actionNickname, username, templateRepo, tableName = 'cloneTemplate') {
+// 	let sql = `INSERT INTO ${tableName}(actionNickname, username, templateRepo) VALUES (?, ?, ?);`;
+// 	await db.run(sql, [actionNickname, username, templateRepo], err => {
+// 		if (err) return console.error(err.message);
+// 		else return console.log(`${actionNickname} stored in ${tableName}`);
+// 	});
+// }
 
 //======================================================================================================================
 function getDataByColumn(value, columnName, tableName) {
@@ -62,16 +67,18 @@ async function returnByColumn(value, columnName = 'actionNickname', tableName = 
 	});
 }
 
-function getDataByID(value, tableName) {
-	return new Promise((resolve, reject) => {
-		let sql = `SELECT * FROM ${tableName} WHERE id = '${value}';`
-		db.serialize(()=>{
-			db.get(sql, (err, rows)=>{
-				if (err) reject(err)
-				resolve(rows)
-			})
-		});
-	})
+async function getDataByID(value, tableName) {
+	if (await checkID(value) === true) {
+		return new Promise((resolve, reject) => {
+			let sql = `SELECT * FROM ${tableName} WHERE id = '${value}';`
+			db.serialize(() => {
+				db.get(sql, (err, rows) => {
+					if (err) reject(err)
+					resolve(rows)
+				})
+			});
+		})
+	} else return false
 }
 
 async function returnByID(value, tableName = 'cloneTemplate') {
@@ -92,7 +99,7 @@ function getAllFromTable(tableName) {
 				resolve(rows)
 			})
 		})
-	} catch (err) {console.log(typeof err, 'asdf')}
+	} catch (err) {console.log(typeof err)}
 }
 
 async function getAll(tableName = 'cloneTemplate') {
@@ -104,11 +111,11 @@ async function getAll(tableName = 'cloneTemplate') {
 async function printAllData(tableName = 'cloneTemplate', printString = true) {
 	let tableData = await getAllFromTable(tableName).then(results => {return results})
 	if (printString === true) {
-		for (i = 0; i < tableData.length; i++) {
+		for (let i = 0; i < tableData.length; i++) {
 			console.log(JSON.stringify(tableData[i]))
 		}
 	} else {
-		for (i = 0; i < tableData.length; i++) {
+		for (let i = 0; i < tableData.length; i++) {
 			console.log(tableData[i])
 		}
 	}
@@ -118,7 +125,7 @@ async function printAllData(tableName = 'cloneTemplate', printString = true) {
 module.exports = {
 	createTable,
 	addColumn,
-	insertCloneTemplateData,
+	// insertCloneTemplateData,
 	returnByColumn,
 	returnByID,
 	getAll,

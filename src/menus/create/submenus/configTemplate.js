@@ -1,8 +1,8 @@
 //
 //TODO IMPROVE UI
 //
-const {insertCloneTemplateData, printAllData} = require('../../database')
-const {convertString} = require('../../scripts/functions');
+const {insertCloneTemplateData, printAllData} = require('../../../database')
+const {convertString} = require('../../../scripts/functions');
 const prompt = require('prompt-sync')({sigint: true});
 
 
@@ -15,9 +15,9 @@ async function configTemplate() {
   //    // \\\\  ||\\ || ||    ||  // \\\\
  ((    ((   )) ||\\\\|| ||==  || (( ___
   \\\\__  \\\\_//  || \\|| ||    ||  \\\\_||`, `font-family: monospace`);
-		console.log('======================================================================================================================')
+		console.log('====================================================================================================================')
 		await printAllData();
-		console.log('======================================================================================================================')
+		console.log('====================================================================================================================')
 		console.log(`\n`)
 		let flag = prompt('  (GB)  Flag: ');
 		let actionNickname = prompt('  (GB)  Action Nickname: ');
@@ -30,12 +30,12 @@ async function configTemplate() {
   //    // \\\\  ||\\ || ||    ||  // \\\\
  ((    ((   )) ||\\\\|| ||==  || (( ___
   \\\\__  \\\\_//  || \\|| ||    ||  \\\\_||`, `font-family: monospace`);
-		console.log('======================================================================================================================')
+		console.log('====================================================================================================================')
 		console.log(`  (GB)  Flag = ${flag}`)
 		console.log(`  (GB)  Action Name = ${actionNickname}`);
 		console.log(`  (GB)  Username = ${username}`);
 		console.log(`  (GB)  Target Repository Name = ${templateRepo}`);
-		console.log('======================================================================================================================')
+		console.log('====================================================================================================================')
 		console.log(`\n`)
 		let confirm = prompt(`  (GB)  SAVE CONFIG: ${actionNickname} WITH FLAG: ${flag}? (y, n) `);
 
@@ -52,7 +52,7 @@ async function configTemplate() {
   //   || \\\\ ||    // \\\\ | || | ||       ||\\\\//|| ||    ||\\ || || ||
  ((    ||_// ||==  ||=||   ||   ||==     || \\/ || ||==  ||\\\\|| || ||
   \\\\__ || \\\\ ||___ || ||   ||   ||___    ||    || ||___ || \\|| \\\\_//`, `font-family: monospace`);
-		console.log('======================================================================================================================')
+		console.log('====================================================================================================================')
 		console.log(`\n`)
 		let exitCheck = prompt(`  (GB)  RETURN TO (CREATE MENU)? (y, n) `);
 

@@ -4,33 +4,31 @@
 const {
     createTable,
     addColumn,
-    insertCloneTemplateData,
     returnByColumn,
     returnByID,
     getAll,
     printAllData
-} = require('./api/makeData.js');
+} = require('./engine/makeData.js');
 
 const {
     queryTableData,
     checkID,
     checkColumn,
     checkTableExists,
-    checkTableRows
-} = require('./api/checkData.js');
+    countTableRows
+} = require('./engine/checkData.js');
 
 const {
     deleteRowByID,
     deleteRowByColumn,
     dropTable
-} = require('./api/deleteData.js');
+} = require('./engine/deleteData.js');
 
 
 module.exports = {
     //makeData
     createTable,
     addColumn,
-    insertCloneTemplateData,
     returnByColumn,
     returnByID,
     getAll,
@@ -40,7 +38,7 @@ module.exports = {
     checkID,
     checkColumn,
     checkTableExists,
-    checkTableRows,
+    countTableRows,
     //deleteData
     deleteRowByID,
     deleteRowByColumn,

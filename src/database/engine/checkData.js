@@ -1,11 +1,11 @@
 //
 //
 //
-const {db} = require('../models/database.js');
+const {db} = require('../schema/database.js');
 
 
 //======================================================================================================================
-//Prints all table data sync
+//Prints all table data
 function queryTableData(tableName = 'cloneTemplate') {
 	let sql = `SELECT * FROM ${tableName};`;
 	db.all(sql, (err, rows) => {
@@ -18,7 +18,7 @@ function queryTableData(tableName = 'cloneTemplate') {
 }
 
 //======================================================================================================================
-//Checks column for value and returns bool
+//Checks column for value and returns bool TODO <=== OPTIMIZE!!!
 async function checkColumn(columnValue, columnName = 'actionNickname', tableName = 'cloneTemplate') {
 	try {
 		let fromTable = () => {
@@ -45,28 +45,12 @@ async function checkColumn(columnValue, columnName = 'actionNickname', tableName
 
 //======================================================================================================================
 //Checks ID for value and returns bool
-async function checkID(idValue, tableName = 'cloneTemplate') {
-	try {
-		let fromTable = () => {
-			return new Promise((resolve, reject) => {
-				if (typeof idValue !== 'number') reject(TypeError('Input must be a number'));
-				let sql = `SELECT * FROM ${tableName} where id = ${idValue};`
-				db.all(sql, (err, result) => {
-					if (err) reject(err.message);
-					resolve(result);
-				});
-			});
-		};
-		let emptyCheck = await fromTable();
-		let transformValue = JSON.stringify(emptyCheck);
-		let endValue = parseInt(transformValue.length)
-		if (endValue === 2) {
-			return false;
-		}
-		if (endValue > 2) {
-			return true;
-		}
-	} catch (err) {console.error(err)}
+async function checkID(value, tableName = 'cloneTemplate') {
+	if (await countTableRows(tableName) >= value && value > 0) {
+		return true;
+	} else if (value === 0) {
+		return 0;
+	} else return false;
 }
 
 //======================================================================================================================
@@ -76,36 +60,25 @@ async function checkTableExists(tableName) {
 		let sql = `SELECT name FROM sqlite_master WHERE type = 'table' AND name = "${tableName}";`
 		db.all(sql, (err, results) => {
 			if (err) reject(err);
-			// resolve(results);
 			resolve(Boolean(results.length))
 		})
 	})
 }
 
 //======================================================================================================================
-//Returns true if table is empty
-async function checkTableRows(tableName = 'cloneTemplate') {
-	try {
-		let fromTable = () => {
-			return new Promise((resolve, reject) => {
-				let sql = `SELECT count(*) from (select 0 from ${tableName} limit 1);`;
-				db.all(sql, (err, result) => {
-					if (err) reject(err.message);
-					resolve(result);
-				});
+//Returns number of rows if table exists, else returns false
+async function countTableRows(tableName = 'cloneTemplate') {
+	if (await checkTableExists(tableName) === true) {
+		return new Promise((resolve, reject) => {
+			let sql = `SELECT count(*) from ${tableName};`
+			db.all(sql, (err, result) => {
+				if (err) reject(err.message);
+				resolve(Object.values(result[0])[0])
 			});
-		};
-		let emptyCheck = await fromTable();
-		let transformValue = JSON.stringify(emptyCheck);
-		let stringMagic = transformValue.charAt(13);
-		let schrodingersValue = parseInt(stringMagic);
-		if (schrodingersValue === 1) {
-			return false;
-		}
-		if (schrodingersValue === 0) {
-			return true;
-		}
-	} catch (err) {return true}
+		});
+	} else {
+		return false;
+	}
 }
 
 
@@ -114,5 +87,5 @@ module.exports = {
 	checkID,
 	checkColumn,
 	checkTableExists,
-	checkTableRows
+	countTableRows
 };
