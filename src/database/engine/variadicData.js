@@ -2,11 +2,30 @@
 //
 //
 const {getDataByID} = require("./makeData.js")
-const {checkID, countTableRows} = require("../index.js");
+const {countTableRows} = require("./checkData.js");
 const {db} = require("../schema/database.js");
 
 
-//======================================================================================================================
+//Variadic column generation
+async function addColumn(tableName, ...columns) {
+    return new Promise((resolve, reject) => {
+        if (columns.length <= 0) {
+            reject()
+        }
+        if (columns.length >= 1) {
+            columns.forEach(ele => {
+                let columnArity = [];
+                columnArity.unshift(`${ele} TEXT`)
+                let restString = columnArity.join(',')
+                let sql = `ALTER TABLE ${tableName} ADD ${restString};`
+                db.run(sql, (err) => {
+                    if (err) reject();
+                })
+            })
+        } resolve(true)
+    })
+}
+
 //Returns array of column names if at least 1 row exists, else returns false
 async function returnColumnData(tableName = 'cloneTemplate') {
     if (await countTableRows(tableName) > 0) {
@@ -22,9 +41,7 @@ async function returnColumnData(tableName = 'cloneTemplate') {
     } else return false
 }
 
-//======================================================================================================================
-//Argument = # of columns
-//OUTPUTS ARRAY OF NEW TABLE DATA
+//Outputs array of row data
 async function variadicArray(columnNumber) {
     return await new Promise((resolve) => {
         let arity = []
@@ -45,4 +62,10 @@ async function insertNewRow(variadicColumns, variadicValues, tableName = 'cloneT
     });
 }
 
-module.exports = {returnColumnData, variadicArray, insertNewRow}
+
+module.exports = {
+    addColumn,
+    returnColumnData,
+    variadicArray,
+    insertNewRow,
+};

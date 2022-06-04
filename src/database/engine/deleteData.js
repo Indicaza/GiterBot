@@ -33,4 +33,8 @@ function dropTable(tableName = 'cloneTemplate') {
 }
 
 
-module.exports = {deleteRowByID, deleteRowByColumn, dropTable};
+module.exports = {
+    deleteRowByID,
+    deleteRowByColumn,
+    dropTable,
+};

@@ -3,38 +3,41 @@
 //
 const {
     createTable,
-    addColumn,
-    returnByColumn,
-    returnByID,
-    getAll,
-    printAllData
+    getDataByColumn,
+    getDataByID,
+    getAllFromTable,
+    printAllData,
 } = require('./engine/makeData.js');
 
 const {
-    queryTableData,
     checkID,
     checkColumn,
     checkTableExists,
-    countTableRows
+    countTableRows,
 } = require('./engine/checkData.js');
 
 const {
     deleteRowByID,
     deleteRowByColumn,
-    dropTable
+    dropTable,
 } = require('./engine/deleteData.js');
+
+const {
+    addColumn,
+    returnColumnData,
+    variadicArray,
+    insertNewRow,
+} = require('./engine/variadicData.js');
 
 
 module.exports = {
     //makeData
     createTable,
-    addColumn,
-    returnByColumn,
-    returnByID,
-    getAll,
+    getDataByColumn,
+    getDataByID,
+    getAllFromTable,
     printAllData,
     //checkData
-    queryTableData,
     checkID,
     checkColumn,
     checkTableExists,
@@ -42,5 +45,10 @@ module.exports = {
     //deleteData
     deleteRowByID,
     deleteRowByColumn,
-    dropTable
+    dropTable,
+    //variadicData
+    addColumn,
+    returnColumnData,
+    variadicArray,
+    insertNewRow,
 }

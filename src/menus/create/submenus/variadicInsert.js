@@ -1,11 +1,9 @@
 //
 //
 //
-
-
-
 const {checkTableExists, countTableRows, deleteRowByID} = require("../../../database");
 const {db} = require("../../../database/schema/database");
+
 
 async function variadicInsert() {
 
@@ -40,3 +38,6 @@ async function variadicInsert() {
         } else console.log(`  Table: "${tableName}" does not exist.`)
     }
 }
+
+
+module.exports = {variadicInsert};
