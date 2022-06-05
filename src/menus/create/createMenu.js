@@ -25,8 +25,8 @@ async function createMenu() {
         console.log(` --------------------------------------------------------------------`)
         console.log('======== create git configs ========================================================================================') //118
         console.log(` ----------------------------------`)
-        console.log('   * config')
-        console.log('   * flags')
+        console.log('   * insert')
+        console.log('   * newTable')
         console.log('   * print')
         console.log('   * home')
         console.log('   * exit')

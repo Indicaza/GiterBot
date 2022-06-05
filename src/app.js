@@ -7,7 +7,7 @@
  */
 //TODO UPDATE IMPORTS/EXPORTS FOR CROSS COMPATIBILITY
 
-const {buildTable} = require('./database/schema/buildTable.js')
+const {buildTable} = require('./database/schema/buildTable.js');
 const {printAllData} = require('./database');
 const {createMenu, deleteMenu} = require('./menus');
 const prompt = require('prompt-sync')({sigint: true});

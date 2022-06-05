@@ -1,5 +1,5 @@
 //
-//TODO IMPROVE UI
+//
 //
 const {insertCloneTemplateData, printAllData} = require('../../../database')
 const {convertString} = require('../../../scripts/functions');
@@ -41,7 +41,7 @@ async function configTemplate() {
 
 		if (convertString(confirm) === true) {
 			console.log('convertString() succeeded');
-			await insertCloneTemplateData(actionNickname, username, templateRepo)
+			await insertCloneTemplateData(actionNickname, username, templateRepo) //todo <==
 			console.clear()
 			break;
 		}

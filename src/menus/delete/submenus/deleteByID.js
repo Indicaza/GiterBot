@@ -1,8 +1,8 @@
 //
 //
 //
-const {returnByID, printAllData, deleteRowByID} = require('../../database');
-const {convertString} = require("../../scripts/functions");
+const {returnByID, printAllData, deleteRowByID} = require('../../../database');
+const {convertString} = require("../../../scripts/functions");
 const prompt = require('prompt-sync')({sigint: true});
 
 

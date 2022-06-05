@@ -1,7 +1,8 @@
 //
-//TODO Make modular so users can create custom tables
+//
 //
 const {checkTableExists, createTable, addColumn} = require('../');
+
 
 //Builds and initializes table
 async function buildTable(tableName, ...columns) {
@@ -13,5 +14,8 @@ async function buildTable(tableName, ...columns) {
     }
 }
 
+// (async () => {
+// 	await buildTable('test', 'flags', 'test1', 'test2', 'test3', 'test4', 'test5')
+// })();
 
 module.exports = {buildTable};

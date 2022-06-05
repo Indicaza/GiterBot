@@ -3,8 +3,8 @@
 //
 const {printAllData} = require('../../database');
 const prompt = require('prompt-sync')({sigint: true});
-const {deleteID} = require('./deleteByID.js')
-const {deleteColumn} = require('./deleteByColumn.js')
+const {deleteID} = require('./submenus/deleteByID.js')
+const {deleteColumn} = require('./submenus/deleteByColumn.js')
 
 
 async function deleteMenu() {

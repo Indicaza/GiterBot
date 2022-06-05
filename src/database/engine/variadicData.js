@@ -4,6 +4,7 @@
 const {getDataByID} = require("./makeData.js")
 const {countTableRows} = require("./checkData.js");
 const {db} = require("../schema/database.js");
+const prompt = require('prompt-sync')({sigint: true});
 
 
 //Variadic column generation
@@ -49,6 +50,7 @@ async function variadicArray(columnNumber) {
             let tableName = prompt(`  (GB)  ${columnNumber[i]}: `)
             arity.push(tableName)
         }
+        console.clear()
         resolve(arity)
     })
 }
