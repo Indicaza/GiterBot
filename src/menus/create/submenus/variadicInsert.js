@@ -79,4 +79,4 @@ async function variadicInsert() {
     await variadicInsert();
 })();
 
-// module.exports = {variadicInsert};
+module.exports = {variadicInsert};

@@ -4,6 +4,8 @@
 const {printAllData} = require('../../database');
 const {configTemplate} = require('./submenus/configTemplate.js')
 const prompt = require('prompt-sync')({sigint: true});
+const {buildTable} = require('../../database/schema/buildTable.js')
+const {variadicInsert} = require('./submenus/variadicInsert.js')
 
 
 async function createMenu() {
@@ -37,10 +39,12 @@ async function createMenu() {
         let userInputFiltered = userInput.toLowerCase();
 
         switch (userInputFiltered) {
-            case 'config':
-                await configTemplate();
+            case 'insert':
+                await variadicInsert();
+                // await configTemplate();
                 break;
-            case 'flags':
+            case 'newTable':
+
                 break;
             case 'print':
                 tableData = 1;
