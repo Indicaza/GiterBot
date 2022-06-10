@@ -10,6 +10,7 @@ const {
 } = require('./engine/makeData.js');
 
 const {
+    listAllTables,
     checkID,
     checkColumn,
     checkTableExists,
@@ -38,6 +39,7 @@ module.exports = {
     getAllFromTable,
     printAllData,
     //checkData
+    listAllTables,
     checkID,
     checkColumn,
     checkTableExists,

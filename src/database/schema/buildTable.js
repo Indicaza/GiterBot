@@ -14,8 +14,5 @@ async function buildTable(tableName, ...columns) {
     }
 }
 
-// (async () => {
-// 	await buildTable('test', 'flags', 'test1', 'test2', 'test3', 'test4', 'test5')
-// })();
 
 module.exports = {buildTable};

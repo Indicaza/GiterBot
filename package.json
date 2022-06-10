@@ -24,13 +24,12 @@
     "GH",
     "GB",
     "sqlite3",
-    "yargs",
     "Workflow",
     "repo"
   ],
   "bin": {
     "GiterBot": "src/app.js",
-    "gb": "src/server.js.js",
+    "gb": "src/app.js.js",
     "permit": "chmod +x ./src"
   },
   "scripts": {

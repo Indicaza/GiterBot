@@ -4,6 +4,16 @@
 const {db} = require('../schema/database.js');
 
 
+function listAllTables() {
+	return new Promise((resolve, reject) => {
+		let sql = `PRAGMA table_list`
+		db.all(sql, (err, result) => {
+			if (err) reject(err)
+			resolve(result)
+		})
+	})
+}
+
 //Returns true if table exists
 async function checkTableExists(tableName) {
 	return await new Promise((resolve, reject) => {
@@ -50,6 +60,7 @@ async function countTableRows(tableName = 'cloneTemplate') {
 
 
 module.exports = {
+	listAllTables,
 	checkTableExists,
 	checkID,
 	checkColumn,

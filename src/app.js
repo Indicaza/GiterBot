@@ -5,7 +5,6 @@
  *
  * @author Indicaza <n/a>
  */
-//TODO UPDATE IMPORTS/EXPORTS FOR CROSS COMPATIBILITY
 
 const {buildTable} = require('./database/schema/buildTable.js');
 const {printAllData} = require('./database');
@@ -27,7 +26,7 @@ const prompt = require('prompt-sync')({sigint: true});
 	 
 	   --- A GitHub CLI that Works as Hard as this Slogan. ---`, `font-family: monospace`);
 	let tableData;
-	for (i = 0; ;i++) {
+	for (let i = 0; ;i++) {
 		if (i >= 1) {
 			console.clear()
 		}
