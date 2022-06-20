@@ -21,6 +21,10 @@
     npm list
         List all project dependencies.
 
+    gh repo create
+        creates a new repository interactively
+
+    squash git branch
 
     GIT COMMANDS MANUALS
 //======================================================================================================================

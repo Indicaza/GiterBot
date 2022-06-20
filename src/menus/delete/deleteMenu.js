@@ -1,10 +1,9 @@
 //
 //
 //
-const {printAllData} = require('../../database');
+const {print} = require('../print/printMenu.js');
+const {deleteRow} = require('./submenus/deleteRow.js');
 const prompt = require('prompt-sync')({sigint: true});
-const {deleteID} = require('./submenus/deleteByID.js')
-const {deleteColumn} = require('./submenus/deleteByColumn.js')
 
 
 async function deleteMenu() {
@@ -13,41 +12,33 @@ async function deleteMenu() {
     for (; ;) {
         console.clear()
         if (tableData === 1) {
-            console.log(`\n`)
-            console.log('====================================================================================================================')
-            await printAllData()
-            console.log('====================================================================================================================')
+            // console.log(`\n`)
+            await print()
         }
 console.log(`%c
   ____    ____ __     ____ ______  ____    ___  ___  ____ __  __ __ __
   || \\\\  ||    ||    ||    | || | ||       ||\\\\//|| ||    ||\\ || || ||
   ||  )) ||==  ||    ||==    ||   ||==     || \\/ || ||==  ||\\\\|| || ||
   ||_//  ||___ ||__| ||___   ||   ||___    ||    || ||___ || \\|| \\\\_//`, `font-family: monospace`);
-        console.log(` ----------------------------------------------------------------------`)
-        console.log('======= delete by column or id =====================================================================================')
-        console.log(` ------------------------------------`)
-        console.log('   * column')
-        console.log('   * id')
-        console.log('   * print')
-        console.log('   * home')
-        console.log('   * exit')
-        console.log(`  ----------------`)
+        console.log('====================================================================================================================')
+        console.log(`   *row*  *table*  *print*  *back*  *exit*   `)
+        console.log(`---------------------------------------------`)
         tableData = 0;
         home = 0;
         let userInput = prompt(`   (GB) = `);
         let userInputFiltered = userInput.toLowerCase();
 
         switch (userInputFiltered) {
-            case 'column':
-                await deleteColumn();
+            case 'row':
+                await deleteRow();
                 break;
-            case 'id':
-                await deleteID();
+            case 'table':
+                //TODO Create a dropTable() UI
                 break;
             case 'print':
                 tableData = 1;
                 break;
-            case 'home':
+            case 'back':
                 home = 1;
                 break;
             case 'exit':

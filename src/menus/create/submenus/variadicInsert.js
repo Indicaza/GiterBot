@@ -9,7 +9,6 @@ const {
     deleteRowByID,
     variadicArray,
     insertNewRow,
-    printAllData,
 } = require("../../../database");
 const {db} = require("../../../database/schema/database");
 const {convertString} = require("../../../scripts/functions");

@@ -14,17 +14,6 @@ function listAllTables() {
 	})
 }
 
-//Returns true if table exists
-async function checkTableExists(tableName) {
-	return await new Promise((resolve, reject) => {
-		let sql = `SELECT name FROM sqlite_master WHERE type = 'table' AND name = "${tableName}";`
-		db.all(sql, (err, results) => {
-			if (err) reject(err);
-			resolve(Boolean(results.length))
-		})
-	})
-}
-
 // Checks column for value and returns bool
 async function checkColumn(columnValue, columnName = 'actionNickname', tableName = 'cloneTemplate') {
 	return new Promise((resolve, reject) => {
@@ -36,15 +25,19 @@ async function checkColumn(columnValue, columnName = 'actionNickname', tableName
 	})
 }
 
-//Checks ID for value and returns bool
-async function checkID(value, tableName = 'cloneTemplate') {
-	if (await countTableRows(tableName) >= value && value > 0) {
-		return true;
-	} else if (value === 0) {
-		return 0;
-	} else return false;
+//TODO just check once before entering a menu loop.
+//Returns true if table exists
+async function checkTableExists(tableName) {
+	return await new Promise((resolve, reject) => {
+		let sql = `SELECT name FROM sqlite_master WHERE type = 'table' AND name = "${tableName}";`
+		db.all(sql, (err, results) => {
+			if (err) reject(err);
+			resolve(Boolean(results.length))
+		})
+	})
 }
 
+//TODO test for single row error
 //Returns number of rows if table exists, else returns false
 async function countTableRows(tableName = 'cloneTemplate') {
 	if (await checkTableExists(tableName) === true) {
@@ -57,6 +50,21 @@ async function countTableRows(tableName = 'cloneTemplate') {
 		});
 	} else return false
 }
+
+//Checks ID for value and returns bool
+async function checkID(value, tableName = 'cloneTemplate') {
+	if (await countTableRows(tableName) >= value && value > 0) {
+		return true;
+	} else if (value === 0) {
+		console.log("checkID = 0")
+		return 0;
+	} else {
+		console.log("checkID = false")
+		return false;
+	}
+}
+
+
 
 
 module.exports = {

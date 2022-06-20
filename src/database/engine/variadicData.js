@@ -28,6 +28,7 @@ async function addColumn(tableName, ...columns) {
 }
 
 //Returns array of column names if at least 1 row exists, else returns false
+//Works with cloneTemplate but not any other table.
 async function returnColumnData(tableName = 'cloneTemplate') {
     if (await countTableRows(tableName) > 0) {
         return await new Promise((resolve) => {
