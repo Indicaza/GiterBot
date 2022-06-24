@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="LanguageInjectionConfiguration">
-    <injection language="SQL" injector-id="comment">
-      <display-name>language=SQL format=false</display-name>
-      <single-file value="false" />
-    </injection>
-  </component>
-</project>
