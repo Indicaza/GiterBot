@@ -28,11 +28,11 @@ async function addColumn(tableName, ...columns) {
 }
 
 //Returns array of column names if at least 1 row exists, else returns false
-//Works with cloneTemplate but not any other table.
-async function returnColumnData(tableName = 'cloneTemplate') {
+//TODO DELETE THIS GARBAGE!!!
+async function returnColumnData(id, tableName = 'cloneTemplate') {
     if (await countTableRows(tableName) > 0) {
         return await new Promise((resolve) => {
-            getDataByID(1, tableName).then(results => {
+            getDataByID(id, tableName).then(results => {
                 let columnData = []
                 for (const [key] of Object.entries(results)) {
                     columnData.push(`${key}`)

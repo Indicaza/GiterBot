@@ -8,11 +8,12 @@ const {
     countTableRows,
     deleteRowByID,
     variadicArray,
-    insertNewRow,
+    insertNewRow, printAllData,
 } = require("../../../database");
 const {db} = require("../../../database/schema/database");
 const {convertString} = require("../../../scripts/functions");
 const {print} = require("../../print/printMenu");
+const {getAllFromTable} = require("../../../database/engine/makeData");
 const prompt = require('prompt-sync')({sigint: true});
 
 
@@ -41,7 +42,7 @@ async function variadicInsert() {
 
         console.log('====================================================================================================================')
         console.log(`   Enter a Table: to manipulate.`)
-        console.log(tableNames)
+        console.log('  ', tableNames)
         console.log('====================================================================================================================')
         console.log(`   *print*  *back*  *exit*   `)
         console.log(`-----------------------------`)
@@ -65,10 +66,24 @@ async function variadicInsert() {
 
         console.clear()
         console.log(`\n`)
-        if (await checkTableExists(tableName) === true && await countTableRows(tableName) >= 1) {
-            let columnCheck = await returnColumnData(tableName)
+        if (await checkTableExists(tableName) === true) {
+
+            let columnCheck;
+            let proxyRow;
+//======================================================================================================================
+            if (await countTableRows(tableName) === 0) {
+                proxyRow = await db.run(`INSERT INTO ${tableName}(id) VALUES (1)`)
+                columnCheck = await returnColumnData(1,tableName)
+                placeholder = 1;
+            } else {
+                proxyRow = await getAllFromTable(tableName)
+                let proxyID = await proxyRow[0].id;
+                columnCheck = await returnColumnData(proxyID, tableName)
+            }
+
+
             console.log('====================================================================================================================')
-            console.log(columnCheck)
+            console.log(await columnCheck)
             console.log('====================================================================================================================')
             await columnCheck.shift()
 
@@ -92,15 +107,14 @@ async function variadicInsert() {
             if (convertString(confirm) === true) {
                 await insertNewRow(variadicColumns, variadicValues, tableName)
                 console.clear()
-                break;
             }
 
             console.clear()
 
 
-        } else if (await countTableRows(tableName) === 0) {
-            await db.run(`INSERT INTO ${tableName}(id) VALUES (1)`)
-            placeholder = 1
+        // } else if (await countTableRows(tableName) === 0) {
+        //     await db.run(`INSERT INTO ${tableName}(id) VALUES (1)`)
+        //     placeholder = 1
         } else {
             console.clear()
             console.log(`\n`)
