@@ -2,6 +2,7 @@
 //
 //
 const {print} = require('../print/printMenu.js');
+const {deleteTable} = require('./submenus/dropTable.js');
 const {deleteRow} = require('./submenus/deleteRow.js');
 const prompt = require('prompt-sync')({sigint: true});
 
@@ -33,7 +34,7 @@ console.log(`%c
                 await deleteRow();
                 break;
             case 'table':
-                //TODO Create a dropTable() UI
+                await deleteTable();
                 break;
             case 'print':
                 tableData = 1;

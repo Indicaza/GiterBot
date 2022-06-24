@@ -4,7 +4,8 @@
 const {print} = require('../print/printMenu.js');
 const prompt = require('prompt-sync')({sigint: true});
 const {variadicInsert} = require('./submenus/variadicInsert.js');
-const {createTable} = require('./submenus/createTable.js');
+const {makeTable} = require('./submenus/createTable.js');
+const {createRow} = require('./submenus/createRow.js');
 
 async function createMenu() {
     let tableData;
@@ -21,19 +22,19 @@ async function createMenu() {
  ((    ||_// ||==  ||=||   ||   ||==     || \\/ || ||==  ||\\\\|| || ||
   \\\\__ || \\\\ ||___ || ||   ||   ||___    ||    || ||___ || \\|| \\\\_//`, `font-family: monospace`);
         console.log('====================================================================================================================')
-        console.log('   *insert*  *newTable*  *print*  *back*  *exit*   ')
-        console.log(`---------------------------------------------------`)
+        console.log('   *row*  *table*  *print*  *back*  *exit*   ')
+        console.log(`---------------------------------------------`)
         tableData = 0;
         home = 0;
         let userInput = prompt(`   (GB) = `);
         let userInputFiltered = userInput.toLowerCase();
 
         switch (userInputFiltered) {
-            case 'insert':
+            case 'row':
                 await variadicInsert();
                 break;
-            case 'newTable':
-                await createTable();
+            case 'table':
+                await makeTable();
                 break;
             case 'print':
                 tableData = 1;

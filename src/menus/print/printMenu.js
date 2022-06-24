@@ -23,14 +23,15 @@ async function print() {
     console.log(`\n`)
     for (; ;) {
 
-        console.log(`   Enter a Table: to Display its Contents. `)
+
         console.log('====================================================================================================================')
-        console.log(tableNames)
+        console.log(`   Table: to print`)
+        console.log('  ', tableNames)
         console.log('====================================================================================================================')
         console.log(`   *back*  *exit*   `)
         console.log(`--------------------`)
         home = 0;
-        let tableName = prompt(`   (GB) = `)
+        let tableName = prompt(`   (GB) (print) = `)
         let userInputFiltered = tableName.toLowerCase();
         switch (userInputFiltered) {
             case 'back':
@@ -59,7 +60,7 @@ async function print() {
         } else {
             console.clear()
             console.log(`\n`)
-            console.log(`   Table: "${tableName}" does not exist. <== inside print()`)
+            console.log(`   Table: "${tableName}" does not exist.`)
         }
     }
 }

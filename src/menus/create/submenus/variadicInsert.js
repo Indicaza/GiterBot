@@ -12,11 +12,17 @@ const {
 } = require("../../../database");
 const {db} = require("../../../database/schema/database");
 const {convertString} = require("../../../scripts/functions");
+const {print} = require("../../print/printMenu");
 const prompt = require('prompt-sync')({sigint: true});
 
 
 async function variadicInsert() {
+
+    let tableData;
+    let home;
     let placeholder = 0;
+    // let tableName;
+
     console.clear()
     console.log(`\n`)
     for (; ;) {
@@ -27,15 +33,40 @@ async function variadicInsert() {
         tableSlice.forEach((tableName) => {
             tableNames.push(tableName.name)
         })
+
+        if (tableData === 1) {
+            await print()
+            console.log(`\n`)
+        }
+
         console.log('====================================================================================================================')
+        console.log(`   Enter a Table: to manipulate.`)
         console.log(tableNames)
         console.log('====================================================================================================================')
-        let tableName = prompt(`  (GB)  Enter Table Name: `)
+        console.log(`   *print*  *back*  *exit*   `)
+        console.log(`-----------------------------`)
+        tableData = 0;
+        home = 0;
+        let tableName = prompt(`   (GB) (table) = `);
+        let userInputFiltered = tableName.toLowerCase();
 
+        switch (userInputFiltered) {
+            case 'print':
+                tableData = 1;
+                break;
+            case 'back':
+                home = 1;
+                break;
+            case 'exit':
+                console.clear()
+                process.kill(process.pid, 'SIGTERM');
+        }
+        if (home === 1) break;
+
+        console.clear()
+        console.log(`\n`)
         if (await checkTableExists(tableName) === true && await countTableRows(tableName) >= 1) {
             let columnCheck = await returnColumnData(tableName)
-            console.clear()
-            console.log(`\n`)
             console.log('====================================================================================================================')
             console.log(columnCheck)
             console.log('====================================================================================================================')
@@ -50,6 +81,7 @@ async function variadicInsert() {
             let variadicValues = JSON.stringify(functionArrayValues).slice(1, -1)
 
             console.log('\n')
+            console.log(`   Table: `)
             console.log('====================================================================================================================')
             for (let i = 0; i < columnCheck.length; i++) {
                 console.log(`  ${columnCheck[i]}: ${functionArrayValues[i]},`)
@@ -64,32 +96,21 @@ async function variadicInsert() {
             }
 
             console.clear()
-            console.log(`%c
-   ___ ____   ____  ___  ______  ____    ___  ___  ____ __  __ __ __
-  //   || \\\\ ||    // \\\\ | || | ||       ||\\\\//|| ||    ||\\ || || ||
- ((    ||_// ||==  ||=||   ||   ||==     || \\/ || ||==  ||\\\\|| || ||
-  \\\\__ || \\\\ ||___ || ||   ||   ||___    ||    || ||___ || \\|| \\\\_//`, `font-family: monospace`);
-                console.log('====================================================================================================================')
-                let exitCheck = prompt(`  (GB)  RETURN TO (CREATE MENU)? (y, n) `);
 
-                if (convertString(exitCheck) === true) {
-                    console.clear()
-                    break;
-                } else {
-                    console.clear()
-                    console.log(`\n`)
-                }
 
-                } else if (await countTableRows(tableName) === 0) {
-                    await db.run(`INSERT INTO ${tableName}(id) VALUES (1)`)
-                    placeholder = 1
-                } else {
-                console.clear()
-                console.log(`\n`)
-                console.log(`  Table: "${tableName}" does not exist.`)
-            }
+        } else if (await countTableRows(tableName) === 0) {
+            await db.run(`INSERT INTO ${tableName}(id) VALUES (1)`)
+            placeholder = 1
+        } else {
+            console.clear()
+            console.log(`\n`)
+            console.log(`  Table: "${tableName}" does not exist.`)
         }
     }
+}
 
 
 module.exports = {variadicInsert};
+
+
+

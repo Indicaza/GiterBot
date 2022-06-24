@@ -17,7 +17,6 @@ async function createTable(newTableName = 'cloneTemplate') {
 	})
 }
 
-//======================================================================================================================
 function getDataByColumn(value, columnName, tableName) {
 	return new Promise((resolve, reject)=>{
 		let sql = `SELECT * FROM ${tableName} WHERE ${columnName} = '${value}';`
@@ -62,11 +61,11 @@ async function printAllData(tableName = 'cloneTemplate', printString = true) {
 	let tableData = await getAllFromTable(tableName).then(results => {return results})
 	if (printString === true) {
 		for (let i = 0; i < tableData.length; i++) {
-			console.log(JSON.stringify(tableData[i]))
+			console.log(' ', JSON.stringify(tableData[i]))
 		}
 	} else {
 		for (let i = 0; i < tableData.length; i++) {
-			console.log(tableData[i])
+			console.log(' ', tableData[i])
 		}
 	}
 }

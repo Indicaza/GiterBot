@@ -26,15 +26,16 @@ async function deleteRow() {
             console.log(`\n`)
         }
 
-        console.log(`   Enter a Table: to Delete Row Contents.`)
+
         console.log('====================================================================================================================')
-        console.log(tableNames)
+        console.log(`   Enter a Table: to Delete Row Contents.`)
+        console.log('  ', tableNames)
         console.log('====================================================================================================================')
         console.log(`   *print*  *back*  *exit*   `)
         console.log(`-----------------------------`)
         tableData = 0;
         home = 0;
-        let tableInput = prompt(`   (GB) = `);
+        let tableInput = prompt(`   (GB) (table name) = `);
         let userInputFiltered = tableInput.toLowerCase();
 
         switch (userInputFiltered) {
@@ -42,6 +43,8 @@ async function deleteRow() {
                 tableData = 1;
                 break;
             case 'back':
+                console.clear()
+                console.log(`\n`)
                 home = 1;
                 break;
             case 'exit':
@@ -60,7 +63,7 @@ async function deleteRow() {
                     await print()
                     console.log(`\n`)
                 }
-                console.log(`   Enter an ID: to Delete Specified Row.`)
+                console.log(`   Table: "${tableInput}"`)
                 console.log('====================================================================================================================')
                 await printAllData(tableInput)
                 console.log('====================================================================================================================')
@@ -68,7 +71,7 @@ async function deleteRow() {
                 console.log(`-----------------------------`)
                 tableData = 0;
                 home = 0;
-                let idInput = prompt(`   (GB) = `);
+                let idInput = prompt(`   (GB) (id) = `);
                 let userInputFiltered = idInput.toLowerCase();
 
                 switch (userInputFiltered) {
@@ -87,7 +90,8 @@ async function deleteRow() {
                 if (home === 1) break;
 
                 if (await checkColumn(parseInt(idInput), "id", tableInput) === true) {
-                    console.log("inside checkID!")
+                    console.clear()
+                    console.log(`\n`)
                     await deleteRowByID(parseInt(idInput), tableInput)
                     break;
                 } else {
@@ -104,7 +108,7 @@ async function deleteRow() {
         } else {
             console.clear()
             console.log(`\n`)
-            console.log(`   Table: "${tableInput}" does not exist. <== inside deleteRow()`)
+            console.log(`   Table: "${tableInput}" does not exist.`)
         }
     }
 }
