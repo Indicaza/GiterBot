@@ -28,8 +28,7 @@ async function addColumn(tableName, ...columns) {
 }
 
 //Returns array of column names if at least 1 row exists, else returns false
-//TODO DELETE THIS GARBAGE!!!
-async function returnColumnData(id, tableName = 'cloneTemplate') {
+async function returnColumnData(id, tableName) {
     if (await countTableRows(tableName) > 0) {
         return await new Promise((resolve) => {
             getDataByID(id, tableName).then(results => {
@@ -57,7 +56,7 @@ async function variadicArray(columnNumber) {
 }
 
 //Inserts user defined data into specified table.
-async function insertNewRow(variadicColumns, variadicValues, tableName = 'cloneTemplate') {
+async function insertNewRow(variadicColumns, variadicValues, tableName) {
     let sql = `INSERT INTO ${tableName} (${variadicColumns}) VALUES (${variadicValues});`
     await db.run(sql, (err, result) => {
         if (err) return console.error(err.message);

@@ -6,7 +6,7 @@ const {db} = require('../schema/database.js');
 
 //======================================================================================================================
 //Delete by id
-function deleteRowByID(id, tableName = 'cloneTemplate') {
+function deleteRowByID(id, tableName) {
     let sql = `DELETE from ${tableName} where id = ${id};`;
     db.run(sql, err => {
         if (err) return console.error(err.message);
@@ -17,7 +17,7 @@ function deleteRowByID(id, tableName = 'cloneTemplate') {
 
 //======================================================================================================================
 //Delete by column
-function deleteRowByColumn(columnValue, column = 'actionNickname', tableName = 'cloneTemplate') {
+function deleteRowByColumn(columnValue, column, tableName) {
     let sql = `DELETE from ${tableName} where ${column} = ${columnValue};`;
     db.run(sql, err => {
         if (err) return console.error(err.message);
@@ -28,7 +28,7 @@ function deleteRowByColumn(columnValue, column = 'actionNickname', tableName = '
 
 //======================================================================================================================
 //Drop table
-function dropTable(tableName = 'cloneTemplate') {
+function dropTable(tableName) {
     db.run(`DROP TABLE ${tableName};`);
 }
 

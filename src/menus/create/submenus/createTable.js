@@ -8,10 +8,6 @@ const {db} = require("../../../database/schema/database");
 const prompt = require('prompt-sync')({sigint: true});
 
 
-// await addColumn(tableInput, columnArray.toString())
-// columnArray.forEach(async (column) => {
-//     await addColumn(tableInput, column);
-// });
 async function insertColumn(tableName, columnArray) {
     for await (let column of columnArray) {
         let sql = `ALTER TABLE ${tableName} ADD ${column};`
@@ -88,8 +84,6 @@ async function makeTable() {
                     await print()
                     console.log(`\n`)
                 }
-
-
 
                 console.log(`   Table: "${tableInput}"`)
                 console.log('====================================================================================================================')

@@ -7,7 +7,7 @@ const {listAllTables, checkTableExists, countTableRows} = require("../index");
 const prompt = require('prompt-sync')({sigint: true});
 
 
-async function createTable(newTableName = 'cloneTemplate') {
+async function createTable(newTableName) {
 	return new Promise((resolve, reject) => {
 		let sql = `CREATE TABLE ${newTableName}(id INTEGER PRIMARY KEY);`
 		db.run(sql, (err, result) => {
@@ -57,7 +57,7 @@ function getAllFromTable(tableName) {
 }
 
 // "printString" toggles obj array or string output
-async function printAllData(tableName = 'cloneTemplate', printString = true) {
+async function printAllData(tableName, printString = true) {
 	let tableData = await getAllFromTable(tableName).then(results => {return results})
 	if (printString === true) {
 		for (let i = 0; i < tableData.length; i++) {

@@ -15,7 +15,7 @@ function listAllTables() {
 }
 
 // Checks column for value and returns bool
-async function checkColumn(columnValue, columnName = 'actionNickname', tableName = 'cloneTemplate') {
+async function checkColumn(columnValue, columnName, tableName) {
 	return new Promise((resolve, reject) => {
 		let sql = `SELECT ${columnName} FROM ${tableName} WHERE EXISTS (SELECT * FROM ${tableName} WHERE ${columnName} = "${columnValue}")`
 		db.get(sql, (err, result) => {
@@ -39,7 +39,7 @@ async function checkTableExists(tableName) {
 
 //TODO test for single row error
 //Returns number of rows if table exists, else returns false
-async function countTableRows(tableName = 'cloneTemplate') {
+async function countTableRows(tableName) {
 	if (await checkTableExists(tableName) === true) {
 		return new Promise((resolve, reject) => {
 			let sql = `SELECT count(*) from ${tableName};`
@@ -52,7 +52,7 @@ async function countTableRows(tableName = 'cloneTemplate') {
 }
 
 //Checks ID for value and returns bool
-async function checkID(value, tableName = 'cloneTemplate') {
+async function checkID(value, tableName) {
 	if (await countTableRows(tableName) >= value && value > 0) {
 		return true;
 	} else if (value === 0) {

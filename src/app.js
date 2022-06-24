@@ -5,16 +5,13 @@
  *
  * @author Indicaza <n/a>
  */
-
-const {buildTable} = require('./database/schema/buildTable.js');
 const {print} = require('./menus/print/printMenu.js');
 const {createMenu, deleteMenu} = require('./menus');
 const prompt = require('prompt-sync')({sigint: true});
 
 
 (async () => {
-	console.clear();
-	await buildTable("cloneTemplate", "flags", "actionNickname", "username", "templateRepo")
+	console.clear()
 	console.clear()
 		console.log(`%c
 	 ██████╗ ██╗████████╗███████╗██████╗ ██████╗  ██████╗ ████████╗

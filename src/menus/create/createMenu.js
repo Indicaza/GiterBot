@@ -2,10 +2,10 @@
 //
 //
 const {print} = require('../print/printMenu.js');
-const prompt = require('prompt-sync')({sigint: true});
-const {variadicInsert} = require('./submenus/variadicInsert.js');
-const {makeTable} = require('./submenus/createTable.js');
 const {createRow} = require('./submenus/createRow.js');
+const {makeTable} = require('./submenus/createTable.js');
+const prompt = require('prompt-sync')({sigint: true});
+
 
 async function createMenu() {
     let tableData;
@@ -31,7 +31,7 @@ async function createMenu() {
 
         switch (userInputFiltered) {
             case 'row':
-                await variadicInsert();
+                await createRow();
                 break;
             case 'table':
                 await makeTable();
