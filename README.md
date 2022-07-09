@@ -1,4 +1,8 @@
+---
+
 # GiterBot
+
+---
 
 ### GiterBot is a configurable Node.js based CLI.  
 (GB) has an integrated sqlite3 database with variadic CRUD functionality that can be manipulated from the prompt based UI, or via command line arguments ...
@@ -9,8 +13,13 @@
 
 ---
 
-Blah blah, insufferable nerd talk. 
-GiterBot is just a backpack for your terminal.  When you come accross usefull commands save them for later and hotkey them.
+<p> Blah blah, insufferable nerd talk, <br>
+GiterBot is basically just a backpack for your terminal.  When you come accross useful commands save em for later and hotkey those bad boys.  For instance, instead of repeatedlly googling the commands to init, create, and manage your GitHub repos, just save them for later in a custom SQL table named "git".  You can easily update these tables at any time
+
+zsh and other CLI tools can do the same thing, but I found them to be way too feature heavy when I was starting out
+
+
+</p>
 
 
 
