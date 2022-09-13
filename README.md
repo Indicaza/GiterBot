@@ -13,8 +13,8 @@
 
 ---
 
-<p> Insufferable nerd talk aside, <br>
-GiterBot is basically just a backpack for your terminal.  When you come accross useful commands save em for later and hotkey those bad boys.  For instance, instead of repeatedlly googling the commands to init, create, merge, and manage your GitHub repos, just save them for later in a custom SQL table named "git".
+<p> Nerd talk aside, <br>
+GiterBot is basically just a backpack for your terminal.  When you come accross useful commands save em for later and hotkey those bad boys.  For instance, instead of repeatedlly googling the commands to manage your GitHub repos, just save them for later in a custom SQL table named "git".
 </p>
 
 
