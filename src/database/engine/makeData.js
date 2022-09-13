@@ -3,7 +3,7 @@
 //
 const {db} = require('../schema/database.js');
 const {checkID} = require("./checkData.js");
-const {listAllTables, checkTableExists, countTableRows} = require("../index");
+// const {listAllTables, checkTableExists, countTableRows} = require("../index");
 const prompt = require('prompt-sync')({sigint: true});
 
 

@@ -32,23 +32,23 @@ const {
 
 
 module.exports = {
-    //makeData
+        //makeData
     createTable,
     getDataByColumn,
     getDataByID,
     getAllFromTable,
     printAllData,
-    //checkData
+        //checkData
     listAllTables,
     checkID,
     checkColumn,
     checkTableExists,
     countTableRows,
-    //deleteData
+        //deleteData
     deleteRowByID,
     deleteRowByColumn,
     dropTable,
-    //variadicData
+        //variadicData
     addColumn,
     returnColumnData,
     variadicArray,
